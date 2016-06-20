@@ -41,6 +41,21 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+// mono log
+$app->configureMonologUsing(function($monolog) {
+
+    // add file handler
+    $fileHandler = new Monolog\Handler\RotatingFileHandler(storage_path() . '/logs/laravel.log');
+    $monolog->pushHandler($fileHandler);
+
+    // add redis handler
+//    $redisHandler = new Monolog\Handler\RedisHandler(new Predis\Client("tcp://localhost:6379"), 'error_logs', \Monolog\Logger::ERROR);
+//    $monolog->pushHandler($redisHandler);
+
+    // add BearyChat handler
+    $monolog->pushHandler(new App\Libraries\BearyChat\BearyChatHandler());
+});
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
