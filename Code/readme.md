@@ -1,12 +1,14 @@
 ### 项目说明
     1. Log模块
         配置：
-            - .env文件里配置BEARYCHAT_HOOK 和 BEARYCHAT_ERROR_HOOK，参考.env.example文件
-            - 在 bootstrap/app.php 文件里配置$app->configureMonologUsing(Closure $closure)。此处的目的是接管 monolog, 即配置文件(config/app.php)里的配置不再起作用
-            - 添加 BearyChatHandle 类，在 App\Libraries\BearyChat\BearyChatHandler 里
+            1). .env文件里配置BEARYCHAT_HOOK 和 BEARYCHAT_ERROR_HOOK，参考.env.example文件
+            2). 在 bootstrap/app.php 文件里配置$app->configureMonologUsing(Closure $closure)。此处的目的是接管 monolog, 即配置文件(config/app.php)里的配置不再起作用
+            3). 添加 BearyChatHandle 类，在 App\Libraries\BearyChat\BearyChatHandler 里
         使用：
-            * Exceptions/Handler.php 里
-            * Log::error('error message');
+            第1种: Exceptions/Handler.php 里
+            第2种: Log::error('error message');
+        发送日志格式：
+            Datetime - Log_Level - Hostname
 
 
     2. BearyChatRobot消息通知
