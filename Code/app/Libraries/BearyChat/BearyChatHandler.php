@@ -16,10 +16,12 @@ use GuzzleHttp\Client;
 class BearyChatHandler extends AbstractProcessingHandler
 {
     private $webhook;
+    private $isOpen;
 
     public function __construct($level = Logger::NOTICE, $bubble = true)
     {
-        $this->webhook = env('BEARYCHAT_ERROR_HOOK');
+        $this->webhook = env('BEARYCHAT_ERROR_NOTICE_HOOK');
+        $this->isOpen = env('BEARYCHAT_ERROR_NOTICE_OPEN', false);
         parent::__construct($level, $bubble);
     }
 
@@ -28,6 +30,15 @@ class BearyChatHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
+        // 未开启
+        if ($this->isOpen == false) {
+            return ;
+        }
+
+
+        /**
+         * send message to BearyChat
+         */
         $client = new Client();
 
         // post data
