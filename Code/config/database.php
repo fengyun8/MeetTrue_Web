@@ -116,9 +116,10 @@ return [
         'cluster' => false,
 
         'default' => [
-            'host'     => '127.0.0.1',
-            'port'     => 6379,
-            'database' => 0,
+            'host' => env('CACHE_HOST', 'localhost'),
+            'port' => env('CACHE_PORT', 6379),
+            'password' => env('CACHE_PASSWORD'),
+            'database' => env('CACHE_DATABASE', 0),
         ],
 
     ],
