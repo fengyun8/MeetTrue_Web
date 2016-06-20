@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 class VerifyCsrfToken extends BaseVerifier
@@ -14,4 +15,20 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
     ];
+
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        // Don't validate CSRF when not prd.
+        if(env('APP_ENV') !== 'prd') {
+            return $this->addCookieToResponse($request, $next($request));
+        }
+        return parent::handle($request, $next);
+    }
 }
