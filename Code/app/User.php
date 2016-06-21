@@ -17,21 +17,21 @@ class User extends Model implements AuthenticatableContract,
     use Authenticatable, Authorizable, CanResetPassword;
 
     /**
-     * The database table used by the model.
+     * User模型对应users表.
      *
      * @var string
      */
     protected $table = 'users';
 
     /**
-     * The attributes that are mass assignable.
+     * $fillable中的字段可以使用create和update批量插入或更新.
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['nickname', 'last_name','first_name','phone','email', 'password'];
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * 返回数据的时候，$hidden中的字段不被返回.
      *
      * @var array
      */
