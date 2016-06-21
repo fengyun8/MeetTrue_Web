@@ -1,3 +1,21 @@
+### 项目自定义文件夹说明
+    1. Enums:
+        枚举类文件夹
+    2. Utils:
+        1). 工具类文件夹
+        2). Trait类文件夹
+    3. Libraries:
+        第三方工具包文件夹
+
+### 项目命名说明
+    Enum：
+        方法: 以Enum后缀结尾
+        例如: StatusCodeEnum
+    Trait：
+        方法: 以Trait后缀结尾
+        例如: ReturnTrait       
+
+
 ### 项目说明
     1. Log模块
         配置：
@@ -20,6 +38,35 @@
             $notify_title   = '这是标题 - 周大哥';
             $notify_content = '这是内容 - 啊啊啊啊';
             App\Libraries\BearyChatRobot::notify($notify_title, $notify_content);
+
+    3. JSON格式返回
+        作用:
+            返回格式统一
+        作用域:
+            Controller里
+        配置:
+            基础Controller里, use ReturnTrait;
+        使用例子:
+            正常情况:
+                return $this->jsonReturn(
+                    StatusCodeEnum::SUCCESS_CODE,       // status_code
+                    '注册成功',                         // msg
+                    compact('user1','user2')            // data
+                );
+            异常情况:
+                $validator = $this->validator($request->all());
+                // 验证失败
+                if ($validator->fails()) {
+                    return $this->jsonReturn(
+                        StatusCodeEnum::ERROR_CODE,     // status_code
+                        $this->formatErrors($validator) // msg
+                    );
+                }
+
+
+
+### 部署说明
+    暂时还没有
 
 
 ### 相关技术
