@@ -3,30 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Auth;
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use App\Enums\StatusCodeEnum;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers;
 
     /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
+     * 构造函数，所有的函数经过guest中间件的验证
      */
     public function __construct()
     {
@@ -34,7 +23,38 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * 覆盖Illuminate\Foundation\Auth\RegistersUsers中的postRegister方法
+     * 其中$this->jsonReturn,$this->formatErrors来自Utils\ReturnTrait类
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        // 验证失败
+        if ($validator->fails()) {
+            return $this->jsonReturn(
+                StatusCodeEnum::ERROR_CODE,
+                $this->formatErrors($validator)
+            );
+        }
+
+        // 验证成功
+        Auth::login($this->create($request->all()));
+        $user1 = User::find(1);
+        $user2 = User::find(2);
+
+        return $this->jsonReturn(
+            StatusCodeEnum::SUCCESS_CODE, 
+            '注册成功', 
+            compact('user1','user2')
+        );
+    }
+
+    /**
+     * 注册时的字段验证.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -42,14 +62,13 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'phone' => 'required|unique:users',
+            'password' => 'required|min:6',
         ]);
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * 注册时通过验证，将该用户记录插入到users表中
      *
      * @param  array  $data
      * @return User
@@ -57,8 +76,8 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'nickname' => $data['phone'].'_P',
+            'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
         ]);
     }
