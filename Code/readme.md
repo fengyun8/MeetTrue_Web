@@ -63,6 +63,52 @@
                     );
                 }
 
+    4. 短信发送模块
+        作用:
+            发送短信
+        使用包:
+            toplan/laravel-sms
+            toplan/phpsms
+        验证码模块:
+            /**
+             * 验证码发送
+             * 参考:Toplan\Sms\SmsController  =>  postSendCode()
+             */
+            $to = '15088692749';
+            $result = SmsManager::requestVerifySms($to, 60);
+
+
+
+            /**
+             * 验证验证码
+             */
+            use SmsManager;
+            ...
+
+            //验证数据
+            $validator = Validator::make($request->all(), [
+                'mobile'     => 'required|confirm_mobile_not_change',
+                'verifyCode' => 'required|verify_code|confirm_rule:mobile,mobile_required',
+                //more...
+            ]);
+            if ($validator->fails()) {
+               //验证失败后建议清空存储的发送状态，防止用户重复试错
+               SmsManager::forgetState();
+               return redirect()->back()->withErrors($validator);
+            }
+
+        普通短信发送
+            云片:
+                // 接收人手机号
+                $to = '1828****349';
+                // 短信内容(内容须是云片提前审核过的模板)
+                $content = '【签名】这是短信内容...';
+                // 只希望使用内容方式放送,可以不设置模板id和模板data(如:云片、luosimao)
+                PhpSms::make()->to($to)->content($content)->send();
+            其他:
+                看看phpsms是用模板，还是直接发送内容
+
+
 
 
 ### 部署说明
