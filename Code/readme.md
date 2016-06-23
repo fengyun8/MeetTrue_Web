@@ -108,8 +108,14 @@
             其他:
                 看看phpsms是用模板，还是直接发送内容
 
-
-
+    5. 队列:
+        作用:
+            处理耗时操作 / 延时操作
+        驱动:
+            服务器上: redis，暂时不研究 beanstalkd
+            本地开发: sync模式
+        教程:
+            [Laravel 5.1版本--队列](http://laravel-china.org/docs/5.1/queues)
 
 ### 部署说明
     暂时还没有
@@ -123,3 +129,7 @@
 ### 相关文档：
     1. 修改主机hostname
         * [ECS Linux主机修改主机名](https://help.aliyun.com/knowledge_detail/5988691.html?pos=2)
+
+### TODO
+    1. 队列驱动:
+        - Beanstalks
