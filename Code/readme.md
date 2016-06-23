@@ -117,6 +117,18 @@
         教程:
             [Laravel 5.1版本--队列](http://laravel-china.org/docs/5.1/queues)
 
+    6. Aliyun-Oss 存储:
+        作用:
+            存储文件到 阿里云oss
+        配置:
+            1). 安装orzcc/aliyun-oss包( composer require "orzcc/aliyun-oss:dev-master" ), git地址:https://github.com/orzcc/aliyun-oss
+        使用:
+            参考: http://laravel-china.org/docs/5.1/filesystem
+            存储:
+                // 上传文件到 oss
+                $file = $request->file('file');
+                $result = Storage::disk('oss')->put('1.jpg', file_get_contents($file));
+
 ### 部署说明
     暂时还没有
 

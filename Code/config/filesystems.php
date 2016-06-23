@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => 'local',
+    'default' => env('FILESYSTEMS_DEFAULT', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,6 +78,16 @@ return [
             'endpoint'  => 'https://identity.api.rackspacecloud.com/v2.0/',
             'region'    => 'IAD',
             'url_type'  => 'publicURL',
+        ],
+
+        'oss' => [
+            'driver'        => 'oss',
+            'access_id'     => env('ALIYUN_ACCESS_ID'),
+            'access_key'    => env('ALIYUN_ACCESS_SECRET'),
+            'bucket'        =>  'meettrue-pictures',
+            'endpoint'      => '', // 青岛节点需要指定，杭州节点不需要
+//            'prefix'		 => 'default/',
+            'prefix'		 => '',
         ],
 
     ],

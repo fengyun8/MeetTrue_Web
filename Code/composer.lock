@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a4053a4698bd44ae6ca7d53b1b5a9544",
-    "content-hash": "67b3fd3e9bb2540fc051c3ea5941f38f",
+    "hash": "725b94b9171cea2ffa0a5e12b1552563",
+    "content-hash": "01177ce00e4e2a0358e00616ec5dae92",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -216,6 +216,98 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "guzzle/guzzle",
+            "version": "v3.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "aa68be2fa33896c0a0a7638d5b8e3f9e1a41bfab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/guzzle/guzzle/aa68be2fa33896c0a0a7638d5b8e3f9e1a41bfab.zip",
+                "reference": "aa68be2fa33896c0a0a7638d5b8e3f9e1a41bfab",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.2",
+                "symfony/event-dispatcher": ">=2.1"
+            },
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-error-response": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
+            },
+            "require-dev": {
+                "doctrine/cache": "*",
+                "monolog/monolog": "1.*",
+                "phpunit/phpunit": "3.7.*",
+                "psr/log": "1.0.*",
+                "symfony/class-loader": "*",
+                "zendframework/zend-cache": "2.0.*",
+                "zendframework/zend-log": "2.0.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle\\Tests": "tests/",
+                    "Guzzle": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2013-07-05 20:17:54"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -792,6 +884,53 @@
                 "php"
             ],
             "time": "2016-02-28 19:48:28"
+        },
+        {
+            "name": "orzcc/aliyun-oss",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/orzcc/aliyun-oss.git",
+                "reference": "154790ea133f91e025db174045b6c4ffe920a02f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/orzcc/aliyun-oss/154790ea133f91e025db174045b6c4ffe920a02f.zip",
+                "reference": "154790ea133f91e025db174045b6c4ffe920a02f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzle/guzzle": "3.7.1",
+                "illuminate/support": "~5.0|~5.1|~5.2",
+                "league/flysystem": "~1.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Orzcc\\AliyunOss\\": "src/",
+                    "Aliyun\\": "src/Aliyun/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "orzcc",
+                    "email": "orzcczh@gmail.com"
+                }
+            ],
+            "description": "Aliyun oss for Laravel5, also support flysystem adapter",
+            "homepage": "https://github.com/orzcc/aliyun-oss",
+            "keywords": [
+                "Flysystem",
+                "aliyun",
+                "laravel",
+                "oss"
+            ],
+            "time": "2015-12-28 06:57:24"
         },
         {
             "name": "paragonie/random_compat",
@@ -3518,7 +3657,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "orzcc/aliyun-oss": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

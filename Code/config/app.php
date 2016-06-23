@@ -146,6 +146,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * self
+         */
+        Orzcc\AliyunOss\AliyunOssServiceProvider::class,
+
     ],
 
     /*
