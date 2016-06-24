@@ -44,7 +44,7 @@ class ApiController extends Controller
         "_v" => "1"
         "_device" => "ios"
         "_t" => "1466759767"
-        "sign" => "a36e19d286c4126b6022384586e451a920ababe6"
+        "_sign" => "a36e19d286c4126b6022384586e451a920ababe6"
         ]
      */
     public function gateway(Request $request)
@@ -62,7 +62,7 @@ class ApiController extends Controller
         $device = $request->input('_device');
         $requestTimestamp = $request->input('_t');
         $apiName = $request->input('api', '');
-        $sign = $request->input('sign');
+        $sign = $request->input('_sign');
 
         // check sign and 本地环境不校验签名
         if ( !Config::get('app.debug') ) {
@@ -112,7 +112,7 @@ class ApiController extends Controller
      */
     private function _checkSign($params, $secret, $sign)
     {
-        unset($params['sign']);
+        unset($params['_sign']);
         ksort($params);
         $str = '';
         foreach($params as $k => $v) {
