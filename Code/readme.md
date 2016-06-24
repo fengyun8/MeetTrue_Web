@@ -129,6 +129,46 @@
                 $file = $request->file('file');
                 $result = Storage::disk('oss')->put('1.jpg', file_get_contents($file));
 
+    7. Api 接口使用说明
+        配置:
+            位置:
+                1. clients 配置在 config/app.php的 clients节点数组
+            说明:
+                app_key: 客户端每次请求需要携带
+                app_secret: 客户端对链接进行签名需要的密钥
+                expired_time: 过期时间
+
+        接口:
+            接口位置:
+                基础接口: App\Http\Api\V1\BaseApi
+                V1版本: App\Http\Api\V1\...
+            参数:
+                _device: 设备类型(目前只有 ios)
+                _t: 访问时间戳
+                _appkey: 设备对应的app key
+                _sign: 签名
+                api: 需要调用的接口
+                data: 具体的参数
+            参数示例:
+                {
+                    "api": "auth.login",
+                    "data": "{\"key\" : \"value\",\"ming\" : \"sss\"}",
+                    "_appkey": "eN3AQjZp2O2TUSnyQpJ1G9Ckzo9SQcqx",
+                    "_v": "1",
+                    "_device": "ios",
+                    "_t": "1466759459",
+                    "_sign": "fe01bd4c3dda90ed757bcbac5f075b9ccbde4a44"
+                }
+        异常:
+            枚举类:
+                App\Enums\ApiExceptionEnum
+            处理类:
+                App\Exceptions\ApiHandler
+            自定义异常类:
+                App\Exceptions\SelfExceptions\...
+
+
+
 ### 部署说明
     暂时还没有
 
