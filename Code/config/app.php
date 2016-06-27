@@ -150,6 +150,7 @@ return [
          * self
          */
         Orzcc\AliyunOss\AliyunOssServiceProvider::class,
+        App\Providers\ImageServiceProvider::class
 
     ],
 
@@ -202,6 +203,10 @@ return [
         'PhpSms' => Toplan\PhpSms\Facades\Sms::class,
         'SmsManager' => Toplan\Sms\Facades\SmsManager::class,
 
+        /**
+         * self
+         */
+        'ImageStrategy' => \App\Facades\ImageStrategy::class,
     ],
 
     'clients' => [
