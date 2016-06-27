@@ -86,8 +86,12 @@ return [
             'access_key'    => env('ALIYUN_ACCESS_SECRET'),
             'bucket'        =>  'meettrue-pictures',
             'endpoint'      => '', // 青岛节点需要指定，杭州节点不需要
-//            'prefix'		 => 'default/',
-            'prefix'		 => '',
+
+            // 注意: 最后面一定要加上'/', 除非其值为''
+            'prefix'		 => 'default/',
+
+            // parse url时用的,
+            'url_prefix'   => 'http://images.meet-true.com/'
         ],
 
     ],

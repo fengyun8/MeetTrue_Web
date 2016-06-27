@@ -202,6 +202,16 @@
                 1). Facade实现:
                     Facade类: App\Facades\ImageStrategy, 其对应的是Contract接口里的App\Contracts\Image\Strategy, 然后在 App 服务容器里寻找已注册的相应的实现类.(此处是在 App\Providers\ImageServiceProvider里绑定的)
 
+    9. UploadService
+        作用：
+            1.上传: 
+                上传按规则命名后的文件
+            2.解析: 
+                按规则解析生成可访问url
+        位置:
+            App\Services\UploadService
+
+
 
 
 
