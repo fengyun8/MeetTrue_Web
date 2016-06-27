@@ -18,26 +18,36 @@
 
 ### 项目说明
     1. Log模块
-        配置：
-            1). .env文件里配置BEARYCHAT_HOOK 和 BEARYCHAT_ERROR_HOOK，参考.env.example文件
-            2). 在 bootstrap/app.php 文件里配置$app->configureMonologUsing(Closure $closure)。此处的目的是接管 monolog, 即配置文件(config/app.php)里的配置不再起作用
-            3). 添加 BearyChatHandle 类，在 App\Libraries\BearyChat\BearyChatHandler 里
-        使用：
-            第1种: Exceptions/Handler.php 里
-            第2种: Log::error('error message');
-        发送日志格式：
-            Datetime - Log_Level - Hostname
+        封装:
+            类：App\Utils\LogUtil
+        使用:
+            info:
+                App\Utils\LogUtil::info($message, $params);
+            warning:
+                App\Utils\LogUtil::warning($message, $params);
+            error:
+                App\Utils\LogUtil::error($message, $params);
+        BearyChat:
+            通知配置：
+                1). .env文件里配置BEARYCHAT_HOOK 和 BEARYCHAT_ERROR_HOOK，参考.env.example文件
+                2). 在 bootstrap/app.php 文件里配置$app->configureMonologUsing(Closure $closure)。此处的目的是接管 monolog, 即配置文件(config/app.php)里的配置不再起作用
+                3). 添加 BearyChatHandle 类，在 App\Services\BearyChat\BearyChatHandler 里
+            使用：
+                第1种: Exceptions/Handler.php 里
+                第2种: App\Utils\LogUtil::error('error message');
+            发送日志格式：
+                Datetime - Log_Level - Hostname
 
 
     2. BearyChatRobot消息通知
         作用：
             通知消息到 BearyChat聊天组里
         配置：
-            添加 BearyChatRobot 类，在 App\Libraries\BearyChat\BearyChatRobot 里
+            添加 BearyChatRobot 类，在 App\Services\BearyChat\BearyChatRobot 里
         使用例子：
             $notify_title   = '这是标题 - 周大哥';
             $notify_content = '这是内容 - 啊啊啊啊';
-            App\Libraries\BearyChatRobot::notify($notify_title, $notify_content);
+            App\Services\BearyChatRobot::notify($notify_title, $notify_content);
 
     3. JSON格式返回
         作用:
