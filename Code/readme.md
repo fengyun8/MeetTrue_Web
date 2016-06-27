@@ -177,6 +177,35 @@
             自定义异常类:
                 App\Exceptions\SelfExceptions\...
 
+    8. 阿里云图片处理服务
+        模块:
+            Facade / Contract / Service
+        使用:
+            $src = \ImageStrategy::process('http://hostname/*.jpg', 'avatar');
+        配置详情:
+            1. Constracts层(接口层):
+                图片处理: 
+                    abstract App\Contracts\Image\ImageBuilder
+                图片策略: 
+                    interface App\Contracts\Image\Strategy
+            2. Service 层(实现层):
+                图片处理:
+                    App\Services\Image\AliyunOss\ImageBuilder extends App\Contracts\Image\ImageBuilder(继承于 Constracts层的抽象类: ImageBuilder)
+                图片策略:
+                    App\Services\Image\AliyunOss\Strategy 继承于上层的Strategy, 继而实现了上层实现的Contracts层的Strategy层接口
+            3. 绑定:
+                1). providers实现:
+                    Provider类: App\Providers\ImageServiceProvider,其对StrategyContract 和 App\Services\Image\AliyunOss\Strategy绑定
+                2). 配置provider
+                    config/app.php 文件里providers数组里配置: App\Providers\ImageServiceProvider::class
+            4. Facade层:
+                1). Facade实现:
+                    Facade类: App\Facades\ImageStrategy, 其对应的是Contract接口里的App\Contracts\Image\Strategy, 然后在 App 服务容器里寻找已注册的相应的实现类.(此处是在 App\Providers\ImageServiceProvider里绑定的)
+
+
+
+
+
 
 
 ### 部署说明
