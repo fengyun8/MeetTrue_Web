@@ -36,9 +36,8 @@ class FileController extends Controller
                 return 'access denied';
             }
 
-            // modify name
-            $topath = strtolower(sprintf('%s%s/%s.%s', gmdate('Y'), gmdate('m'), Str::quickRandom(), $ext));
-
+            // modify name(randomStr()-时间戳)
+            $topath = strtolower(sprintf('%s%s/%s-%s.%s', gmdate('Y'), gmdate('m'), Str::quickRandom(), time(), $ext));
             // upload
             return UploadService::upload($topath, $file);
         }

@@ -210,6 +210,14 @@
                 按规则解析生成可访问url
         位置:
             App\Services\UploadService
+        使用:
+            上传本地:
+                UploadService::upload($topath, $file, 'local');
+            上传oss:
+                UploadService::upload($topath, $file);
+            解析:
+                $tt = UploadService::parse('oss:201511/0zv3vre6horj7lc9.jpg');
+
 
 
 
