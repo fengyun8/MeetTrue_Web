@@ -1,5 +1,5 @@
 <?php
-namespace App\Libraries\BearyChat;
+namespace App\Services\BearyChat;
 
 use GuzzleHttp\Client;
 
@@ -7,12 +7,12 @@ use GuzzleHttp\Client;
  * Send Message To BearyChat
  *
  * Class BearyChatRobot
- * @package App\Libraries
+ * @package App\Services
  *
  * @example
  *      $notify_title   = '这是标题 - 周大哥';
         $notify_content = '这是内容 - 啊啊啊啊';
-        App\Libraries\BearyChatRobot::notify($notify_title, $notify_content);
+        App\Services\BearyChatRobot::notify($notify_title, $notify_content);
  */
 class BearyChatRobot
 {

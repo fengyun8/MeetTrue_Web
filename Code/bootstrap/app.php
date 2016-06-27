@@ -53,7 +53,7 @@ $app->configureMonologUsing(function($monolog) {
 //    $monolog->pushHandler($redisHandler);
 
     // add BearyChat handler
-    $monolog->pushHandler(new App\Libraries\BearyChat\BearyChatHandler());
+    $monolog->pushHandler(new App\Services\BearyChat\BearyChatHandler());
 });
 
 /*

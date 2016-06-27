@@ -1,5 +1,5 @@
 <?php
-namespace App\Libraries\BearyChat;
+namespace App\Services\BearyChat;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
  * Log Notice By Beary Chat
  *
  * Class BearyChatHandler
- * @package App\Libraries
+ * @package App\Services
  */
 class BearyChatHandler extends AbstractProcessingHandler
 {
@@ -50,10 +50,8 @@ class BearyChatHandler extends AbstractProcessingHandler
                 [
                     // message title
                     'title' => current(preg_split("/([\n\r]+)/i", $record['message'])),
-
-                    // 堆栈信息不输出出来
-//                    'text' => $record['message'],
-
+                    // 堆栈信息只输出第一级
+                    'text' => current(preg_split("/#1/i", $record['formatted'])),
                     // error color
                     'color' => '#ff0000'
                 ]
