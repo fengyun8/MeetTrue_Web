@@ -17,7 +17,10 @@ Route::post('api', 'APIController@gateway');
 //文件上传接口
 Route::controller('file', 'File\FileController');
 
+//后台 admin
 Route::group(['namespace' => 'Admin'], function()
 {
   Route::get('/admin', 'AdminController@index');
 });
+
+Route::get('/', 'PagesController@index');

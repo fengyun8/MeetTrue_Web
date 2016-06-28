@@ -1,0 +1,2 @@
+@extends('app')
+Home Page
