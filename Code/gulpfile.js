@@ -5,3 +5,7 @@ require('laravel-elixir-stylus');
 elixir(function(mix) {
    mix.stylus('app.styl');
 });
+
+elixir(function(mix) {
+   mix.stylus('admin.styl');
+});

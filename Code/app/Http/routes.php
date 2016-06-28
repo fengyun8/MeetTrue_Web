@@ -19,5 +19,5 @@ Route::controller('file', 'File\FileController');
 
 Route::group(['namespace' => 'Admin'], function()
 {
-  Route::get('/dashboard', 'AdminController@index');
+  Route::get('/admin', 'AdminController@index');
 });
