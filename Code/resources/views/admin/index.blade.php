@@ -1,2 +1,3 @@
 @extends('admin')
-<div class="title">Admin dashboard</div>
+@section('content')
+@endsection
