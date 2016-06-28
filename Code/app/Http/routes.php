@@ -1,8 +1,5 @@
 <?php
 
-use \App\Services\UploadService;
-
-
 // 注册路由...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');

@@ -226,6 +226,28 @@
                 http://www.maatwebsite.nl/laravel-excel/docs
             github:
                 https://github.com/Maatwebsite/Laravel-Excel
+        使用:
+            导入:
+                // 1. 读取用户传入的文件(参数文件直接读取)
+                $file = $request->file('excel');
+                \Excel::load($file->getRealPath(), function($reader) {
+
+                    // reader methods
+                    dd($reader->get());
+                });
+            导出:
+                // 1. 数组导出方式
+                $data = array(
+                    array('data1', 'data2'),
+                    array('data3', 'data4')
+                );
+
+                \Excel::create('Filenamess', function($excel) use($data) {
+
+                    $excel->sheet('Sheetname', function($sheet) use($data) {
+                        $sheet->fromArray($data);
+                    });
+                })->export('xls');
 
 
 
