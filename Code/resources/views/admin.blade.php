@@ -5,12 +5,12 @@
     <title>Admin</title>
     <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
 </head>
-<body>
-    @include('admin.components.sidebar')
-    <div class="container">
-        <div class="content">
-            @yield('content')
-        </div>
+<body class="admin">
+  <main class="index">
+    @include('admin/sidebar')
+    <div class="content">
+      @yield('content')
     </div>
+  </main>
 </body>
 </html>
