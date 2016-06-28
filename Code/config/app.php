@@ -150,7 +150,8 @@ return [
          * self
          */
         Orzcc\AliyunOss\AliyunOssServiceProvider::class,
-        App\Providers\ImageServiceProvider::class
+        App\Providers\ImageServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -207,6 +208,7 @@ return [
          * self
          */
         'ImageStrategy' => \App\Facades\ImageStrategy::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
     'clients' => [
