@@ -46,7 +46,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => public_path().'/upload',
-            'url_prefix' => url('upload') . '/',
+            'url_prefix' => function () { return url('upload') . '/';},
         ],
 
         'ftp' => [
