@@ -4,11 +4,12 @@
         <title>Admin</title>
         <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
     </head>
-    <body>
-        <div class="container">
+    <body class="admin">
+        <main class="home">
+            @include('global/sidebar')
             <div class="content">
                 @yield('content')
             </div>
-        </div>
+        </main>
     </body>
 </html>
