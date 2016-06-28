@@ -218,6 +218,15 @@
             解析:
                 $tt = UploadService::parse('oss:201511/0zv3vre6horj7lc9.jpg');
 
+    10. Excel工具
+        作用:
+            Excel导入导出
+        参考文档:
+            官方:
+                http://www.maatwebsite.nl/laravel-excel/docs
+            github:
+                https://github.com/Maatwebsite/Laravel-Excel
+
 
 
 
