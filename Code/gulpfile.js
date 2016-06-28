@@ -5,5 +5,6 @@ elixir(function(mix) {
   // mix.browserSync({
   //     proxy: "mt.dev"
   //   })
-  mix.stylus(['app.styl', 'admin.styl']);
+  mix.stylus('app.styl')
+    .stylus('admin.styl');
 });

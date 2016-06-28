@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
 </head>
 <body class="admin">
-  <main class="index">
+  <main class="home">
     @include('admin/sidebar')
     <div class="content">
       @yield('content')
