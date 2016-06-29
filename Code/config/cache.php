@@ -76,4 +76,6 @@ return [
 
     'prefix' => 'laravel',
 
+    // 设置缓存时间(权限系统有用), 缓存时间至少1分钟
+    'ttl' => env('CACHE_TTL', 1),
 ];

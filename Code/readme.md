@@ -249,6 +249,28 @@
                     });
                 })->export('xls');
 
+    11. 权限管理
+        扩展:
+            zizaco/entrust:5.2.x-dev
+        文档:
+            https://github.com/Zizaco/entrust
+        使用:
+            参考:
+                 FileController 的 postUpload()方法
+            代码:
+                // Check Permission
+                if (!auth()->user()->can('file.upload')) {
+                    return $this->jsonReturn(
+                            StatusCodeEnum::NO_PERMISSION_CODE,
+                            $this->sysMessage(StatusCodeEnum::NO_PERMISSION_CODE)
+                    );
+                }
+        注意:
+            1. 具体权限在数据库的permissions表里配置, 相关表也需配置
+            2. 权限设置了缓存, 缓存时间为: config/cache.php -> 'ttl'配置项配置, 读取.env文件里的CACHE_TTL 时间, 默认最低缓存1分钟
+            3. 如果手动在数据库里设置权限，需等缓存到期后方能看到权限改变.如需及时看到, 可以及时清除缓存. 或采用接口管理权限列表.
+
+
 
 
 
