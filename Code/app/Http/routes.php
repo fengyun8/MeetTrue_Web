@@ -24,3 +24,4 @@ Route::group(['namespace' => 'Admin'], function()
 });
 
 Route::get('/', 'PagesController@index');
+Route::get('test', 'PagesController@test');
