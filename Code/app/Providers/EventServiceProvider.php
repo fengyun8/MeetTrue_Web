@@ -13,8 +13,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        // Login Event
+        'App\Events\LoginEvent' => [
+            'App\Listeners\OperateLogEventListener',        // 记录操作日志
         ],
     ];
 

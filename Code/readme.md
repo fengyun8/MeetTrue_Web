@@ -270,6 +270,27 @@
             2. 权限设置了缓存, 缓存时间为: config/cache.php -> 'ttl'配置项配置, 读取.env文件里的CACHE_TTL 时间, 默认最低缓存1分钟
             3. 如果手动在数据库里设置权限，需等缓存到期后方能看到权限改变.如需及时看到, 可以及时清除缓存. 或采用接口管理权限列表.
 
+    12. 操作日志
+        参考文档:
+            http://laravel-china.org/docs/5.1/events
+        表:
+            operator_log
+        实现方式:
+            1. Event绑定「App\Listeners\OperateLogEventListener」
+            2. Event里添加参数「operateLog」
+                结构: 
+                    参考:
+                        「App\Events\LoginEvent」
+                    形式:
+                        // Operate Log Data
+                        $this->operateLog['operator_id'] = $user['id'];
+                        $this->operateLog['user_id'] = $user['id'];
+                        $this->operateLog['type'] = OperateLogTypeEnum::LOGIN;
+                        $this->operateLog['ip'] = $request->ip();
+                        // $this->operateLog['extra'] = $request->all();     // 不要包含敏感的数据
+        使用:
+            「Controller」: \Event::fire(new LoginEvent($request, auth()->user()));
+
 
 
 
