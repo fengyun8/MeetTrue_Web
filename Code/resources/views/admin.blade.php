@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="{{ asset('css/admin.css')}}">
 </head>
 <body class="admin">
-  @include('svg.all')
   <main class="home">
     @include('admin/sidebar')
     <div class="content">

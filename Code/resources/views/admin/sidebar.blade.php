@@ -4,5 +4,4 @@
       <a class="sidebar__link sidebar__link--active" href="#">专题</a>
     </li>
   </ul>
-  <svg><use xlink:href="#qwe" /></svg>
 </div>
