@@ -152,7 +152,7 @@ return [
         Orzcc\AliyunOss\AliyunOssServiceProvider::class,
         App\Providers\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        Zizaco\Entrust\EntrustServiceProvider::class,
     ],
 
     /*
@@ -209,6 +209,8 @@ return [
          */
         'ImageStrategy' => \App\Facades\ImageStrategy::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+
     ],
 
     'clients' => [

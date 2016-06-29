@@ -11,7 +11,8 @@
         "orzcc/aliyun-oss": "dev-master",
         "predis/predis": "^1.1",
         "guzzlehttp/guzzle": "~6.0",
-        "maatwebsite/excel": "~2.1.0"
+        "maatwebsite/excel": "~2.1.0",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
