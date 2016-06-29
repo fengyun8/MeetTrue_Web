@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "33b1fc725b522d8268e74e9e6b37c239",
-    "content-hash": "6a53fe9f34145be949c41a765c809d05",
+    "hash": "0237a62f2893528e355163ae1ad2de42",
+    "content-hash": "290a946b9365721294e122d25aeadd6a",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -3830,7 +3830,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "orzcc/aliyun-oss": 20
+        "orzcc/aliyun-oss": 20,
+        "zizaco/entrust": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

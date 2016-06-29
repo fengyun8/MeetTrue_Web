@@ -8,16 +8,16 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "toplan/laravel-sms": "2.4.*",
-        "orzcc/aliyun-oss": "dev-master"
+        "orzcc/aliyun-oss": "dev-master",
+        "predis/predis": "^1.1",
+        "guzzlehttp/guzzle": "~6.0",
+        "maatwebsite/excel": "~2.1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1",
-        "predis/predis": "^1.1",
-        "guzzlehttp/guzzle": "~6.0",
-        "maatwebsite/excel": "~2.1.0"
+        "phpspec/phpspec": "~2.1"
     },
     "autoload": {
         "classmap": [
