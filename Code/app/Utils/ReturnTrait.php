@@ -3,6 +3,8 @@
 namespace App\Utils;
 
 use Illuminate\Contracts\Validation\Validator;
+use App\Enums\StatusCodeEnum;
+use Illuminate\Support\Arr;
 
 /**
  * Return Trait
@@ -34,5 +36,23 @@ trait ReturnTrait
     public function formatErrors(Validator $validator)
     {
         return $validator->errors()->all();
+    }
+
+    /**
+     * Get Sys Message
+     * @param null $code
+     * @return mixed
+     */
+    public function sysMessage($code = null)
+    {
+        $stat = [
+            // 系统状态码
+            StatusCodeEnum::SUCCESS_CODE => '操作成功',
+            StatusCodeEnum::NO_PERMISSION_CODE => '权限不足',
+
+            // 自定义状态码
+        ];
+
+        return Arr::get($stat, $code, '');
     }
 }
