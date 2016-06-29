@@ -19,6 +19,8 @@ Route::group(['namespace' => 'Admin'], function()
 // Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
   Route::get('/admin', 'AdminController@index');
+  Route::get('/admin/banner', 'AdminController@index');
+  Route::get('/admin/activity', 'AdminController@getActivity');
 });
 
 Route::get('/', 'PagesController@index');

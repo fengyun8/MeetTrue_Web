@@ -2,8 +2,8 @@
 @section('content')
   <div class="pageContent">
     <p class="toolBar">
-      <span class="toolBar__title">banner</span>
-      <button class="toolBar__btn btn__noStyle">添加banner</button>
+      <span class="toolBar__title">活动</span>
+      <button class="toolBar__btn btn__noStyle">添加活动</button>
     </p>
     <div class="operatingFloor">
       <p class="operatingFloor__titleBar">

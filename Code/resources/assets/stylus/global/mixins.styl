@@ -1,0 +1,82 @@
+hidden-visually()
+  border 0
+  clip rect(1px, 1px, 1px, 1px)
+  height 1px
+  overflow hidden
+  padding 0
+  position absolute
+  width 1px
+
+link-clean()
+  text-decoration none
+  &:hover, &:focus, &:active
+    text-decoration none
+    
+/* 清除按钮样式 */
+btn-clean()
+  border none
+  outline none
+  box-shadow none
+  background none
+    
+/* 单行文字溢出省略 */
+text-truncate()
+  max-width 100%
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+  word-wrap normal
+
+/* 多行文字溢出隐藏 */
+text-truncate-line(n)
+  overflow: hidden
+  text-overflow: ellipsis
+  display: -webkit-box
+  -webkit-line-clamp: n
+  -webkit-box-orient: vertical
+
+/* 背景居中 */
+bgi-center()
+    background-repeat: no-repeat
+    background-position: 50% 50%
+    background-size: cover
+  
+/* 此函数可以达到 分列排布效果 
+ * 在仅有两个子元素情况下效果类似与两个子元素左右浮动
+ * 但是在元素溢出父容器时会对溢出元素做类似左浮效果
+ */
+space-between()
+  display flex
+  justify-content space-between
+  flex-flow row wrap
+  align-items center
+  &>*
+    box-sizing border-box
+
+/* 不换行效果 */
+space-between-nowrap()
+  display flex
+  justify-content space-between
+  flex-flow row nowrap
+  align-items center
+  &>*
+    box-sizing border-box
+
+/* 竖排 沉底效果 */
+flex-col-end()
+  display flex
+  flex-flow column wrap
+  justify-content flex-end
+  
+/* 绝逼居中效果 */
+flex-center()
+  display flex
+  flex-flow row wrap
+  justify-content center
+  align-items center
+
+/* 背景渐变 */
+linear-gradient(topColor,bottomColor,defultColor)
+  background defultColor
+  background -moz-linear-gradient(top, topColor, bottomColor)  
+  background -webkit-gradient(linear, 0 0, 0 bottom, from(topColor), to(bottomColor))
