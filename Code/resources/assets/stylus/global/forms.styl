@@ -1,4 +1,5 @@
 .form--auth
+  animation slide-left-in 0.45s cubic-bezier(1, -0.14, 0.1, 1.32)
   margin 32px 157.5px 0 37.5px
   .form__input
     outline none
@@ -13,12 +14,12 @@
 .form__field
   margin-top 40px
   
-.form__field--withSwitch
-  position relative
-  svg
+
+.form__field
+  .svg--eyeClosed, .svg--eyeOpening
     bottom 6px
     right 6px
     visibility hidden
     position absolute
-  .is-active
+  svg.is-active
     visibility visible

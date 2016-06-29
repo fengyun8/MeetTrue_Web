@@ -7,6 +7,18 @@
     </head>
     <body class="@yield('body-class')">
         @include('svg.all')
+        <nav class="nav">
+            <div class="nav__content u-clearfix">
+                <div class="nav__leftPart u-floatLeft">
+                <a class="siteLogo" href="/">
+                  <svg class="svg svg--logo"><use xlink:href="#meet-true" /></svg>
+                </a>
+                </div>
+                <div class="nav__rightPart u-floatRight">
+                    @yield('right-nav')
+                </div>
+            </div>
+        </nav>
         <div class="content">
             <div class="surface">
                 @yield('content')

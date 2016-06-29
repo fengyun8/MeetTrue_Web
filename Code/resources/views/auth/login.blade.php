@@ -1,12 +1,16 @@
 @extends('auth.layout')
+@section('body-class', 'login')
+@section('right-nav')
+    <a href="/auth/register" class="u-fontSizeSmaller link link--dark" >注册</a>
+@endsection
 @section('fields')
     <div class="form__field">
         <input class="form__input u-sizeFullWidth" type="text" name="email" value="{{ old('email') }}" placeholder="输入邮箱/手机号">
     </div>
-    <div class="form__field form__field--withSwitch">
+    <div class="form__field u-positionRelative">
         <input class="form__input u-sizeFullWidth" type="password" name="password" id="password" placeholder="输入密码">
         <svg class="svg svg--eyeClosed is-active"><use xlink:href="#eye-closed" /></svg>
-        <svg class="svg svg--eyeOpen"><use xlink:href="#eye-open" /></svg>
+        <svg class="svg svg--eyeOpening"><use xlink:href="#eye-open" /></svg>
     </div>
 @endsection
 @section('actions')
