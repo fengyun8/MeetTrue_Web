@@ -7,5 +7,7 @@ elixir(function(mix) {
   //   })
   mix
     .stylus('app.styl')
-    .stylus('admin.styl');
+    .stylus('admin.styl')
+    .scripts('app.js')
+    .scripts('admin.js');
 });
