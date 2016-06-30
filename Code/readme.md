@@ -77,36 +77,19 @@
         作用:
             发送短信
         使用包:
-            toplan/laravel-sms
             toplan/phpsms
         验证码模块:
-            /**
-             * 验证码发送
-             * 参考:Toplan\Sms\SmsController  =>  postSendCode()
-             */
-            $to = '15088692749';
-            $result = SmsManager::requestVerifySms($to, 60);
-
-
-
-            /**
-             * 验证验证码
-             */
-            use SmsManager;
-            ...
-
-            //验证数据
-            $validator = Validator::make($request->all(), [
-                'mobile'     => 'required|confirm_mobile_not_change',
-                'verifyCode' => 'required|verify_code|confirm_rule:mobile,mobile_required',
-                //more...
-            ]);
-            if ($validator->fails()) {
-               //验证失败后建议清空存储的发送状态，防止用户重复试错
-               SmsManager::forgetState();
-               return redirect()->back()->withErrors($validator);
-            }
-
+            SMS Module:
+                1. 短信发送的配置文件在config/laravel-sms中
+                2. 控制器层：App\Http\Controllers\Utils\SmsController
+                3. 发送的主要文件：App\Services\Sms\SmsManager.php
+                4. 使用SmsManager门面，在App\Facades\SmsManager
+                5. 扩张的验证写在：App\Services\Sms\Validations.php
+                6. 验证的中文信息在：resources\lang\zh-Hans\validation
+                7. 服务提供者在 App\Providers\中
+                8. 短信的验证码是放在cache中的，接口：App\Contracts\Storage,实现的两个类在App\Services\Storage中
+                9. 发送短信路由：sms/send-code
+                10. 查看cache的信息   sms/info
         普通短信发送
             云片:
                 // 接收人手机号
@@ -290,6 +273,35 @@
                         // $this->operateLog['extra'] = $request->all();     // 不要包含敏感的数据
         使用:
             「Controller」: \Event::fire(new LoginEvent($request, auth()->user()));
+
+    13. 邮件
+        作用:
+            1. 找回密码(因为使用Send Cloud,故无需使用队列)
+            2. 普通发邮件功能
+        包:
+            "naux/sendcloud": "^1.1"
+        表:
+            mt_password_resets
+        实现方式:
+            1. 配置.env 文件, Email 和 Send Cloud部分
+            2. 路由:
+                GET password/email                  // 通过邮箱找回密码页面
+                POST password/email                 // 通过邮箱提交找回密码
+                GET password/reset                  // 通过邮箱重置秘密页面
+                POST password/reset/{token}         // 通过邮箱重置密码真实操作
+            3. PasswordController里使用了 ResetsPasswords trait
+        使用:
+            普通邮件:
+                \Mail::send('emails.password', [], function ($message) {
+                    $message->subject('觅处｜Meet－True密码取回 ');
+                    $message->to('2773630878@qq.com');
+                });
+        说明:
+            1. .env文件里设置 MAIL_DRIVER, 不同模式值:
+                dev: log
+                    说明:
+                        1. 此时邮件发送到日志里, 需要到日志里查看
+                pre / prd: sendcloud
 
 
 
