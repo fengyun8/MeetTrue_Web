@@ -46,6 +46,8 @@ class Handler extends ExceptionHandler
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
+        // TODO 这里错误需要给人性化的提示
+
         return parent::render($request, $e);
     }
 }
