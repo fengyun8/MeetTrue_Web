@@ -81,4 +81,12 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+     * 忘记密码
+     */
+    public function getForgetpwd()
+    {
+        return view('auth/forgetpwd');
+    }
 }

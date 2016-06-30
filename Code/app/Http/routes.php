@@ -9,6 +9,9 @@ Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
+// 忘记密码
+Route::get('auth/forgetpwd', 'Auth\AuthController@getForgetpwd');
+
 // Api 部分
 Route::post('api', 'APIController@gateway');
 //文件上传接口
