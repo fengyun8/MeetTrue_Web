@@ -21,6 +21,11 @@ trait ReturnTrait
      */
     public function jsonReturn($code, $msg = NULL, $data = NULL)
     {
+        // Handle Success Msg
+        if ($msg == NULL && $code == StatusCodeEnum::SUCCESS_CODE) {
+            $msg = $this->sysMessage(StatusCodeEnum::SUCCESS_CODE);
+        }
+
         return response()->json([
             'status_code' => $code,
             'msg' => $msg,
