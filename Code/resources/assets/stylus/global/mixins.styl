@@ -45,34 +45,35 @@ bgi-center()
  * 在仅有两个子元素情况下效果类似与两个子元素左右浮动
  * 但是在元素溢出父容器时会对溢出元素做类似左浮效果
  */
-space-between()
+ /* 参数：column 或者 row*/
+space-between(align)
   display flex
   justify-content space-between
-  flex-flow row wrap
+  flex-flow align wrap
   align-items center
   &>*
     box-sizing border-box
 
-/* 不换行效果 */
-space-between-nowrap()
+/* 不换行效果 */ /* 参数：column 或者 row*/
+space-between-nowrap(align)
   display flex
   justify-content space-between
-  flex-flow row nowrap
+  flex-flow align nowrap
   align-items center
   &>*
     box-sizing border-box
 
-/* 竖排 沉底效果 */
-flex-col-end()
+/* 竖排 沉底效果 */ /* 参数：column 或者 row*/
+flex-col-end(align)
   display flex
-  flex-flow column wrap
+  flex-flow align wrap
   justify-content flex-end
   
-/* 绝逼居中效果 */
-flex-center()
+/* 绝逼居中效果 */ /* 参数：column 或者 row*/
+flex-center(align)
   display flex
-  flex-flow row wrap
-  justify-content center
+  flex-flow align wrap
+  justify-content space-around
   align-items center
 
 /* 背景渐变 */
