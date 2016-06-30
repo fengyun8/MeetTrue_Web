@@ -11,9 +11,9 @@
         "predis/predis": "^1.1",
         "guzzlehttp/guzzle": "~6.0",
         "maatwebsite/excel": "~2.1.0",
-        "zizaco/entrust": "5.2.x-dev"
-        "orzcc/aliyun-oss": "dev-master",
-        "toplan/phpsms": "~1.5.3"
+        "zizaco/entrust": "5.2.x-dev",
+        "toplan/phpsms": "~1.5.3",
+        "naux/sendcloud": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

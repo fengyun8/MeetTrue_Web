@@ -153,6 +153,7 @@ return [
         App\Providers\ImageServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Naux\Mail\SendCloudServiceProvider::class,
     ],
 
     /*
