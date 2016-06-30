@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\StatusCodeEnum;
 use App\Http\Controllers\Controller;
+use App\Utils\LogUtil;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Mail\Message;
+use Exception;
+use Monolog\Logger;
 
 class PasswordController extends Controller
 {
@@ -20,6 +27,9 @@ class PasswordController extends Controller
 
     use ResetsPasswords;
 
+    // 邮件找回密码 Subject
+    protected $subject = '觅处｜Meet－True密码取回 ';
+
     /**
      * Create a new password controller instance.
      *
@@ -28,5 +38,38 @@ class PasswordController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Send a reset link to the given user.
+     *
+     * // 422: 找不到对应的邮箱用户
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postEmail(Request $request)
+    {
+        // Check Email
+        $this->validate($request, ['email' => 'required|email']);
+
+        try {
+            // Send Email
+            $response = Password::sendResetLink($request->only('email'), function (Message $message) {
+                $message->subject($this->getEmailSubject());
+            });
+        } catch (Exception $e) {
+            LogUtil::error("重置密码邮件失败: " . $e->getMessage(), ['error' => $e]);
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '邮件发送失败,工程师正在紧急恢复中,敬请谅解!');
+        }
+
+        // Handle Result
+        switch ($response) {
+            case Password::RESET_LINK_SENT:
+                return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
+
+            case Password::INVALID_USER:
+                return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans($response));
+        }
     }
 }

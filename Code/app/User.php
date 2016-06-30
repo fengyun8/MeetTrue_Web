@@ -34,4 +34,12 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    /************************************ Arrtribute 部分 *************************************/
+    public function getNameAttribute()
+    {
+        // 合并名字
+            return $this->last_name . $this->first_name;
+    }
 }

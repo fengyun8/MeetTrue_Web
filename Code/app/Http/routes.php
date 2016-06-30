@@ -34,4 +34,17 @@ Route::group(['namespace' => 'Admin'], function()
 });
 
 Route::get('/', 'PagesController@index');
+// test route
 Route::get('test', 'PagesController@test');
+
+
+// Password Route
+Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
+    // 密码重置链接的路由...
+    Route::get('email', 'PasswordController@getEmail');
+    Route::post('email', 'PasswordController@postEmail');
+
+    // 密码重置的路由...
+    Route::get('reset/{token}', 'PasswordController@getReset');
+    Route::post('reset', 'PasswordController@postReset');
+});
