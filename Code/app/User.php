@@ -26,7 +26,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['nickname', 'last_name','first_name','phone','email', 'password'];
+    protected $fillable = ['nickname', 'last_name','first_name','mobile','email', 'password'];
 
     /**
      * 返回数据的时候，$hidden中的字段不被返回.

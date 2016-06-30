@@ -3,26 +3,11 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | 路由组中间件
-    |--------------------------------------------------------------------------
-    |
-    | 配置内置路由组'laravel-sms'的中间件,
-    | 如果是web应用建议为'web',
-    | 如果是api应用(无session),建议为'api'。
-    |
-    */
-    'middleware' => 'web',
-
-    /*
-    |--------------------------------------------------------------------------
     | 是否数据库记录发送日志
     |--------------------------------------------------------------------------
-    |
-    | 若需开启此功能,需要先生成一个内置的'laravel_sms'表,
-    | 运行'php artisan migrate'命令可以自动生成。
-    |
+    |数据日子存于 Laravel-sms 表中，该表已经存在
     */
-    'dbLogs' => false,
+    'dbLogs' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -33,14 +18,6 @@ return [
     | 并管理其启用状态(enable),默认静态验证规则(default)以及所有可用静态验证规则(staticRules)。
     |
     |--------------------------------------------------------------------------
-    |
-    | field => settings: [
-    |     'enable'      => (bool)
-    |     'default'     => (name)
-    |     'staticRules' => [
-    |         (name) => (rule)
-    |     ]
-    | ]
     |
     */
     'validation' => [
@@ -93,9 +70,9 @@ return [
     | 验证码有效时间长度，单位为分钟(minutes)
     |
     */
-    'verifySmsContent' => '【your app signature】亲爱的用户，您的验证码是%s。有效期为%s分钟，请尽快验证',
+    'verifySmsContent' => '【觅处网】验证码：%s， %s分钟内验证有效，请立即验证',
     'codeLength'       => 5,
-    'codeValidMinutes' => 5,
+    'codeValidMinutes' => 15,
 
     /*
     |--------------------------------------------------------------------------
@@ -106,19 +83,12 @@ return [
     | 存储key的prefix
     |
     | storage:
-    | 存储方式,是一个实现了'Toplan\Sms\Storage'接口的类的类名,
-    | 内置可选的值有'Toplan\Sms\SessionStorage'和'Toplan\Sms\CacheStorage',
-    | 如果不填写storage,那么系统会自动根据'laravel-sms'路由组中间件(middleware)的配置值选择存储器,
-    | 如果中间件含有'web',会选择使用'Toplan\Sms\SessionStorage',
-    | 如果中间件含有'api',会选择使用'Toplan\Sms\CacheStorage'。
-    |
-    | 内置storage的个性化配置:
-    | 1. 在laravel项目的'config/session.php'文件中可以对'Toplan\Sms\SessionStorage'进行更多个性化设置
-    | 2. 在laravel项目的'config/cache.php'文件中可以对'Toplan\Sms\CacheStorage'进行更多个性化设置
+    | 存储方式,是一个实现了'App\Contracts\Storage\Storage'接口的类的类名,
+    | 内置可选的值有'App\Services\Storage\SessionStorage'和'App\Services\Storage\CacheStorage',
     |
     */
     'prefix'  => 'laravel_sms',
-    'storage' => '',
+    'storage' => 'App\Services\Storage\CacheStorage',
 
     /*
     |--------------------------------------------------------------------------
@@ -126,5 +96,5 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'queueJob' => 'Toplan\Sms\SendReminderSms',
+    'queueJob' => 'App\Jobs\SendReminderSms',
 ];

@@ -18,7 +18,7 @@ return [
      * 'Luosimao', 'YunTongXun', 'YunPian', 'SubMail', 'Ucpaas', 'JuHe', 'Alidayu', 'Log'
      */
     'scheme' => [
-        'Log',
+        'YunPian' => '1',
     ],
 
     /*
@@ -39,7 +39,7 @@ return [
          */
         'YunPian' => [
             //用户唯一标识，必须
-            'apikey' => 'your api key',
+            'apikey' => 'ce586ca354cf38e76d00effd654a50f7',
         ],
 
         /*

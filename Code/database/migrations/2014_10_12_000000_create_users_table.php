@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable()->comment('姓');
             $table->string('first_name')->nullable()->comment('名');
             $table->string('email')->unique()->nullable()->comment('邮箱');
-            $table->string('phone')->unique()->nullable()->comment('手机号');
+            $table->string('mobile')->unique()->nullable()->comment('手机号');
             $table->string('password', 60)->comment('密码');
             $table->string('avatar')->default('')->comment('用户头像');
             $table->smallInteger('gender')->default(2)->comment('性别：0-女,1-男,2-保密');

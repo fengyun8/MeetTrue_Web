@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use App\Enums\StatusCodeEnum;
+use SmsManager;
 
 class AuthController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        // $this->middleware('guest', ['except' => 'getLogout']);
     }
 
     /**
@@ -35,6 +36,8 @@ class AuthController extends Controller
 
         // 验证失败
         if ($validator->fails()) {
+            SmsManager::forgetState();
+
             return $this->jsonReturn(
                 StatusCodeEnum::ERROR_CODE,
                 $this->formatErrors($validator)
@@ -43,13 +46,10 @@ class AuthController extends Controller
 
         // 验证成功
         Auth::login($this->create($request->all()));
-        $user1 = User::find(1);
-        $user2 = User::find(2);
 
         return $this->jsonReturn(
             StatusCodeEnum::SUCCESS_CODE, 
-            '注册成功', 
-            compact('user1','user2')
+            '注册成功'
         );
     }
 
@@ -62,8 +62,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'phone' => 'required|unique:users',
             'password' => 'required|min:6',
+            'mobile'     => 'required|zh_mobile|unique:users',
+            'verifyCode' => 'required|verify_code',
         ]);
     }
 
@@ -76,8 +77,8 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'nickname' => $data['phone'].'_P',
-            'phone' => $data['phone'],
+            'nickname' => $this->defaultNickname(),
+            'mobile' => $data['mobile'],
             'password' => bcrypt($data['password']),
         ]);
     }
@@ -88,5 +89,21 @@ class AuthController extends Controller
     public function getForgetpwd()
     {
         return view('auth/forgetpwd');
+    }
+
+    /**
+     * 刚注册的nickname给一个mt_随机整数
+     * @return String  [eg: mt_0845297613]
+     */
+    private function defaultNickname() 
+    {
+        $result = 'mt_';
+        $arr=range(0,9);
+        shuffle($arr);
+        foreach($arr as $value) {
+          $result .= $value; 
+        }
+
+        return $result;
     }
 }

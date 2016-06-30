@@ -7,12 +7,13 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "toplan/laravel-sms": "2.4.*",
         "orzcc/aliyun-oss": "dev-master",
         "predis/predis": "^1.1",
         "guzzlehttp/guzzle": "~6.0",
         "maatwebsite/excel": "~2.1.0",
         "zizaco/entrust": "5.2.x-dev"
+        "orzcc/aliyun-oss": "dev-master",
+        "toplan/phpsms": "~1.5.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

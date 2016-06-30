@@ -76,6 +76,7 @@ return [
     "unique"           => ":attribute已经存在。",
     "url"              => ":attribute格式不正确。",
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -88,8 +89,13 @@ return [
     */
 
     'custom' => [
-        'phone' => [
+        'mobile' => [
             'unique' => '该手机号已经被注册',
+            'zh_mobile' => '手机号码不正确',
+        ],
+        'verifyCode' => [
+            'verify_code' => '验证码错误',
+           
         ],
     ],
 
@@ -118,7 +124,8 @@ return [
         'password' => '密码',
         'password_confirmation' => '确认密码',
         'avatar' => '头像',
-        'phone' => '手机号'
+        'mobile' => '手机号',
+        'verifyCode' => '验证码',
     ],
 
 ];

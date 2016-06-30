@@ -1,5 +1,7 @@
 <?php
 
+Route::controller('/zjp', 'ZjpTestController');
+
 // 注册路由...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
@@ -11,6 +13,11 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // 忘记密码
 Route::get('auth/forgetpwd', 'Auth\AuthController@getForgetpwd');
+// 与发送短信相关
+Route::controller('sms', 'Utils\SmsController');
+
+// 与验证相关
+Route::controller('verify', 'Utils\ValidateController');
 
 // Api 部分
 Route::post('api', 'APIController@gateway');

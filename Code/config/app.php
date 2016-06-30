@@ -136,7 +136,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Toplan\PhpSms\PhpSmsServiceProvider::class,
-        Toplan\Sms\SmsManagerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -145,6 +144,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\SmsManagerServiceProvider::class,
 
         /**
          * self
@@ -202,7 +202,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'PhpSms' => Toplan\PhpSms\Facades\Sms::class,
-        'SmsManager' => Toplan\Sms\Facades\SmsManager::class,
 
         /**
          * self
@@ -210,7 +209,7 @@ return [
         'ImageStrategy' => \App\Facades\ImageStrategy::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-
+        'SmsManager' => App\Facades\SmsManager::class,
     ],
 
     'clients' => [
