@@ -13,6 +13,7 @@
       font-size 16px
   .btn__auth
     margin-top 25px
+    
 .form__field
   margin-top 40px
   .svg
@@ -24,4 +25,14 @@
 
   .is-visible
     visibility visible
- 
+
+.from__error,
+.from__error--bottom
+  position relative
+  &:after
+    content attr(data-error)
+    position absolute
+    bottom -1.5em
+    left 0
+    color red-error
+    font-size 14px

@@ -25,7 +25,7 @@
                 <svg class="svg svg--switch is-visible"><use y="5" xlink:href="#eye-closed" /></svg>
                 <svg class="svg svg--switch"><use xlink:href="#eye-opening" /></svg>
             </div>
-            <a href="#" class="u-floatRight u-TextColorGraya7 u-paddingTop10">忘记密码?</a>
+            <a href="#" class="u-floatRight u-TextColorGraya7 u-paddingTop10 link">忘记密码?</a>
             <button class="btn btn__auth u-sizeFullWidth" type="submit">立即注册</button>
             <p class="u-TextColorGraya7 u-floatRight u-paddingTop15">已有觅处帐号？ <a href="/auth/login" class="u-textColorOrange">立即登录</a></p>
         </form>

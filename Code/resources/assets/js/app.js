@@ -1,5 +1,9 @@
 import $ from 'jquery'
 
+import password from './auth/password'
+var moduleMap = {};
+moduleMap.password = new password('mobile');
+
 $(function() {
   $('.svg--switch').click(e => {
     $('.svg--switch').toggleClass('is-visible')
@@ -30,3 +34,10 @@ $(function() {
     }, 1000)
   }
 })
+
+moduleMap.password.sayName()
+window.onload = function () {
+  var moduleNameList = document.querySelector('body').className;
+  moduleMap[moduleNameList].sayName();
+}
+
