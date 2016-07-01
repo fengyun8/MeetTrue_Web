@@ -41,6 +41,7 @@ class SmsController extends Controller
     {
         $mobile = $request->input('mobile', null);
         $interval = $request->input('interval', 60);
+        $data = ['mobile' => $mobile, 'interval' => $interval, 'mobile_rule' => 'mobile_required'];
 
         $res = SmsManager::validateSendable($interval);
         if (!$res['success']) {
@@ -51,7 +52,7 @@ class SmsController extends Controller
             );
         }
 
-        $res = SmsManager::validateFields($request->all());
+        $res = SmsManager::validateFields($data);
         if (!$res['success']) {
             return $this->jsonReturn(
                 StatusCodeEnum::ERROR_CODE, 
@@ -63,9 +64,9 @@ class SmsController extends Controller
 
         if (!$res['success']) {
             if ($res['logs']['0']['result']['code'] == 22 ) {
-            return $this->jsonReturn(22, '同一手机号每小时最多只能发3次验证码，请过一小时再来');
+            return $this->jsonReturn(22, '该小时获取次数超过上限，过1小时再来吧');
             } elseif ($res['logs']['0']['result']['code'] == 17) {
-                return $this->jsonReturn(17, '同一手机号每天最多只能发10次验证码，请明天再来');
+                return $this->jsonReturn(17, '今天获取次数超过上限，明天再来吧');
             } else {
                 return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '验证码发送失败');
             }

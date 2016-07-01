@@ -43,7 +43,7 @@ return [
     "integer"          => ":attribute必须是整数。",
     "ip"               => ":attribute必须是有效的IP地址。",
     "max"              => [
-        "numeric" => ":attribute不能大于:max。",
+        "numeric" => ":attribute不能大于:max位",
         "file"    => ":attribute不能大于:max kb。",
         "string"  => ":attribute不能大于:max个字符。",
         "array"   => ":attribute最多只有:max个单元。",
@@ -91,7 +91,7 @@ return [
     'custom' => [
         'mobile' => [
             'unique' => '该手机号已经被注册',
-            'zh_mobile' => '手机号码不正确',
+            'zh_mobile' => '请输入正确的手机号',
         ],
         'verifyCode' => [
             'verify_code' => '验证码错误',

@@ -25,7 +25,7 @@ class ValidateController extends Controller
         if($find) {
             return $this->jsonReturn(
                 StatusCodeEnum::ERROR_CODE,
-                '该手机号已被注册'
+                '该手机号已注册'
             );
         } else {
             return $this->jsonReturn(
