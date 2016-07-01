@@ -4,8 +4,6 @@ import Login from './auth/login'
 import Register from './auth/register'
 window.$ = $;
 
-var module = $('body').data('module').split(' ');
-
 var moduleMap = {};
 moduleMap.password = new Password();
 moduleMap.login = new Login();
@@ -24,5 +22,4 @@ $(function () {
   moduleNameList.forEach(function(moduleName){
     !!moduleMap[moduleName] && moduleMap[moduleName].init();
   })
-  
 })

@@ -9,8 +9,8 @@
 @section('content')
   <div class="pwd pwd--mobile">
     <p class="u-tac">
-      <span class="pwd__title">手机找回</span>
-      <span class="pwd__title">邮箱找回</span>
+      <span class="pwd__title pwd__mobileTitle">手机找回</span>
+      <span class="pwd__title pwd__emailTitle">邮箱找回</span>
     </p>
     <div class="pwd__content">
       <div class="pwd__mobile">
@@ -23,17 +23,17 @@
             <input type="text" class="input u-sizeFullWidth" placeholder="输入验证码">
             <img class="pwd__verifyCode" src="{{ url('pic-code/create')}}" alt="">
           </p>
-          <p class="input u-flexBetweenNowrap pwd__formGroup">
+          <p class="pwd__mobileCodeBox input u-flexBetweenNowrap pwd__formGroup" style="display: none;">
             <input type="text" class="input__noStyle" placeholder="输入手机验证码">
             <button type="button" class="btn__noStyle u-fontSizeSmaller u-TextColorGraya7">已发送验证码 60s</button>
           </p>
-          <p class="u-pt40 u-flexBetweenNowrap">
-            <button type="button" class="pwd__btn btn__auth btn--gray">返回注册登录</button>
-            <button type="button" class="pwd__btn btn__auth">下一步</button>
+          <p class="u-pt40 u-flexBetweenNowrap pwd__loginBtnBox">
+            <a href="{{ url('./auth/login') }}" class="pwd__btn link btn__auth btn--gray">返回注册登录</a>
+            <button type="button" class="pwd__btn btn__auth pwd__btn--next">下一步</button>
           </p>
-          <p class="u-pt40 u-flexBetweenNowrap">
+          <p class="u-pt40 u-flexBetweenNowrap pwd__findBtnBox" style="display: none;">
             <button type="button" class="pwd__btn btn__auth btn--gray">上一步</button>
-            <button type="submit" class="pwd__btn btn__auth">下一步</button>
+            <button type="submit" class="pwd__btn btn__auth pwd__btn--next">下一步</button>
           </p>
         </form>
       </div>
@@ -51,7 +51,7 @@
             <input type="email" name="email" class="input u-sizeFullWidth" value="{{ old('email') }}" placeholder="输入邮箱">
           </p>
           <p class="u-pt40 u-flexBetweenNowrap">
-            <button type="button" type="button" class="pwd__btn btn__auth btn--gray">返回注册登录</button>
+            <a href="{{ url('./auth/login') }}" class="pwd__btn link btn__auth btn--gray">返回注册登录</a>
             <button type="button" type="submit" class="pwd__btn btn__auth">下一步</button>
           </p>
       </form>
