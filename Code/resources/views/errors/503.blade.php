@@ -3,7 +3,7 @@
     <head>
         <title>Be right back.</title>
 
-        
+
 
         <style>
             html, body {
@@ -40,7 +40,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.</div>
+                <div class="title">Sorry, 攻城狮开小差了！！！</div>
             </div>
         </div>
     </body>

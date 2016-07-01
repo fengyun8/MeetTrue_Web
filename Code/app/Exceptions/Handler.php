@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,8 +46,10 @@ class Handler extends ExceptionHandler
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
-
-        // TODO 这里错误需要给人性化的提示
+        // 人性化提示错误(debug模式显示错误)
+        if (config('app.debug') != true && !($e instanceof HttpException)) {
+            $e = new ServiceUnavailableHttpException($e->getMessage(), $e);
+        }
 
         return parent::render($request, $e);
     }
