@@ -16,8 +16,9 @@ Route::controller('sms', 'Utils\SmsController');
 
 // 与验证相关:1.验证手机唯一，2:生成图片验证码；3：图片验证码验证
 Route::post('verify/phone-unique', 'Utils\ValidateController@phoneUnique');
-Route::get('pic-code/create', 'Utils\ValidateController@createPicCode');
-Route::post('pic-code/verify', 'Utils\ValidateController@verifyPicCode');
+Route::get('pic/create-code', 'Utils\ValidateController@createPicCode');
+Route::post('pic/verify-code', 'Utils\ValidateController@verifyPicCode');
+Route::post('sms/verify-code', 'Utils\ValidateController@verifySmsCode');
 
 // 忘记密码
 Route::get('auth/password', 'Auth\AuthController@getPassword');
@@ -50,4 +51,7 @@ Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
     // 密码重置的路由...
     Route::get('reset/{token}', 'PasswordController@getReset');
     Route::post('reset', 'PasswordController@postReset');
+
+    //手机重置密码
+    Route::post('reset-phone', 'PasswordController@postResetByPhone');
 });

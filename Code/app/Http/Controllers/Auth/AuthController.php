@@ -69,7 +69,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'password' => 'required|min:6｜max:12',
-            'mobile'     => 'required|zh_mobile|unique:users',
+            'mobile'     => 'required|zh_mobile|unique:users|confirm_mobile_not_change',
             'verifyCode' => 'required|verify_code',
         ]);
     }

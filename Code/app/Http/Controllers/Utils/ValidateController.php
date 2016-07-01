@@ -77,4 +77,34 @@ class ValidateController extends Controller
             return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE,'success');
         }
     }
+
+    /**
+     * 验证短信码是否正确
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function verifySmsCode(Request $request) 
+    {
+        $mobile = $request->input('mobile');
+        $validator = Validator::make(Input::all(), [
+        'mobile'     => 'required|confirm_mobile_not_change|zh_mobile',
+        'verifyCode' => 'required|verify_code|confirm_mobile_rule:mobile_required',
+        ]);
+
+        if ($validator->fails()) {
+            \SmsManager::forgetSentInfo();
+
+            return $this->jsonReturn(
+                StatusCodeEnum::ERROR_CODE,
+                $this->formatErrors($validator)
+            );
+        }
+
+        $user = User::where('mobile', $mobile)->first();
+        Auth::login($user);
+        return $this->jsonReturn(
+            StatusCodeEnum::SUCCESS_CODE,
+            'success'
+        );
+    }
 }

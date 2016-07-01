@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Mail\Message;
 use Exception;
 use Monolog\Logger;
+use Auth;
+use Validator;
 
 class PasswordController extends Controller
 {
@@ -70,6 +72,38 @@ class PasswordController extends Controller
 
             case Password::INVALID_USER:
                 return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans($response));
+        }
+    }
+
+    public function postResetByPhone(Request $request)
+    {
+        $data['password'] = $request->input('password');
+
+        $validator = Validator::make($data, [
+        'password'     => 'required|min:6|max:12|confirmed'
+        ]);
+
+        if ($validator->fails()) {
+
+            return $this->jsonReturn(
+                StatusCodeEnum::ERROR_CODE,
+                $this->formatErrors($validator)
+            );
+        }
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->password = bcrypt($data['password']);
+            $user->save();
+
+            Auth::logout();
+            return $this->jsonReturn(
+                StatusCodeEnum::SUCCESS_CODE,
+                '密码重置成功'
+            );
+
+        return $this->jsonReturn(
+            StatusCodeEnum::ERROR_CODE,
+            '密码重置失败'
         }
     }
 }
