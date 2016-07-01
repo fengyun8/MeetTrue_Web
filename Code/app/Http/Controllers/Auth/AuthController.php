@@ -25,7 +25,7 @@ class AuthController extends Controller
      * 登录失败跳转的路径
      * @var string
      */
-    protected $loginPath = '/login';
+    protected $loginPath = '/auth/login';
 
     /**
      * 构造函数，所有的函数经过guest中间件的验证
@@ -50,19 +50,14 @@ class AuthController extends Controller
         if ($validator->fails()) {
             SmsManager::forgetState();
 
-            return $this->jsonReturn(
-                StatusCodeEnum::ERROR_CODE,
-                $this->formatErrors($validator)
-            );
+            return redirect('auth/register')
+                ->withErrors(['errors' => $this->formatErrors($validator)]);
         }
 
         // 验证成功
         Auth::login($this->create($request->all()));
 
-        return $this->jsonReturn(
-            StatusCodeEnum::SUCCESS_CODE, 
-            '注册成功'
-        );
+        return redirect()->intended($this->redirectPath());
     }
 
     /**
@@ -131,14 +126,16 @@ class AuthController extends Controller
         $remember = $request->has('remember');
 
         if($credentials == '' || $password == '') {
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '帐号和密码都不能为空');
+            return redirect($this->loginPath())
+                ->withErrors(['errors' => '账户和密码都不能为空']);
         }
 
         // 尝试登录,成功则成为已登录状态
         $result = Auth::attempt(['email' => $credentials, 'password' => $password], $remember) || Auth::attempt(['mobile' => $credentials, 'password' => $password], $remember);
         
         if(!$result) {
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '账户和密码不匹配');
+            return redirect($this->loginPath())
+                ->withErrors(['errors' => '账户和密码不匹配']);
         } elseif ($request->has('redirect_url')) {
             return redirect()->to($request->input('redirect_url'));
         } else {
