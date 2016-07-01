@@ -1,9 +1,15 @@
 import $ from 'jquery'
-import password from './auth/password'
+import Password from './auth/password'
+import Login from './auth/login'
+import Register from './auth/register'
 window.$ = $;
 
+var module = $('body').data('module').split(' ');
+
 var moduleMap = {};
-moduleMap.password = new password();
+moduleMap.password = new Password();
+moduleMap.login = new Login();
+moduleMap.register = new Register();
 
 /**
  * 模块启动方法
@@ -19,36 +25,4 @@ $(function () {
     !!moduleMap[moduleName] && moduleMap[moduleName].init();
   })
   
-})
-
-
-$(function() {
-  $('.svg--switch').click(e => {
-    $('.svg--switch').toggleClass('is-visible')
-    var $password = $('#password')
-    if($password.attr('type') === 'password') {
-      $password.attr('type', 'text')
-    } else {
-      $password.attr('type', 'password')
-    }
-    $password.focus()
-  })
-
-  $('.btn--smsCode').click(e => {
-    countdown(10, e.target)
-    e.target.setAttribute('disabled', true)
-  })
-
-  function countdown(seconds, display) {
-    var timer = setInterval(function() {
-      seconds--
-      if( seconds === 0) {
-        clearInterval(timer)
-        display.textContent = '获取验证码'
-        display.removeAttribute('disabled')
-      } else {
-        display.textContent = seconds + ' 秒后重新获取'
-      }
-    }, 1000)
-  }
 })

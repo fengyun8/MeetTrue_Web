@@ -5,4 +5,4 @@ export default class Password {
   init () {
     console.log(this.name);
   }
-} 
+}

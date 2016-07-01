@@ -1,5 +1,6 @@
 @extends('app')
 @section('body-class', 'login')
+@section('module', 'login')
 @section('right-nav')
     <a href="/auth/register" class="u-fontSizeSmaller link link--dark" >注册</a>
 @endsection
@@ -20,9 +21,9 @@
                 <svg class="svg svg--switch is-visible"><use y="5" xlink:href="#eye-closed" /></svg>
                 <svg class="svg svg--switch"><use xlink:href="#eye-opening" /></svg>
             </div>
-            <a href="#" class="u-floatRight u-TextColorGraya7 u-paddingTop10 link">忘记密码?</a>
+            <a href="#" class="u-floatRight u-TextColorGraya7 u-pt10 link">忘记密码?</a>
             <button class="btn btn__auth u-sizeFullWidth" type="submit">登录</button>
-            <p class="u-TextColorGraya7 u-floatRight u-paddingTop15">还没有觅处帐号？ <a href="/auth/register" class="u-textColorOrange">立即注册</a></p>
+            <p class="u-TextColorGraya7 u-floatRight u-pt15">还没有觅处帐号？ <a href="/auth/register" class="link u-textColorOrange">立即注册</a></p>
         </form>
     </div>
 @endsection

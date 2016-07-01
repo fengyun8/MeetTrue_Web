@@ -49,9 +49,8 @@ class AuthController extends Controller
         // 验证失败
         if ($validator->fails()) {
             SmsManager::forgetState();
-
             return redirect('auth/register')
-                ->withErrors(['errors' => $this->formatErrors($validator)]);
+                ->withErrors($validator);
         }
 
         // 验证成功

@@ -28,8 +28,8 @@ Route::post('api', 'APIController@gateway');
 Route::controller('file', 'File\FileController');
 
 //后台 admin
-Route::group(['namespace' => 'Admin'], function()
-// Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
+// Route::group(['namespace' => 'Admin'], function()
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
   Route::get('/admin', 'AdminController@index');
   Route::get('/admin/banner', 'AdminController@index');
