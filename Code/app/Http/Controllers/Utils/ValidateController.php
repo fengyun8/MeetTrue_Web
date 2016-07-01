@@ -48,8 +48,6 @@ class ValidateController extends Controller
 
     /**
      * 验证手机是否注册，验证输入的验证码是否正确
-     * @param  Request $request [description]
-     * @return [type]           [description]
      */
     public function verifyPicCode(Request $request)
     {
