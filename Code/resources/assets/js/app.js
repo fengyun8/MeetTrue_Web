@@ -2,6 +2,7 @@ import $ from 'jquery'
 import Password from './auth/password'
 import Login from './auth/login'
 import Register from './auth/register'
+
 window.$ = $;
 
 var moduleMap = {};

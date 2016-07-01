@@ -11,42 +11,43 @@ var state = {
   thisType: "mobile"
 }
 
-function init(){
-  $('.pwd__title').click(function(){
-    if($(this).hasClass('pwd__mobileTitle')){
-      switchModule('mobile');
-    }else if($(this).hasClass('pwd__emailTitle')){
-      switchModule('email');
+export default class Password {
+  constructor () {
+    this.state = state
+    this.switchModule = module => {
+      $(".pwd").attr("class",`pwd pwd--${module}`)
+      state.thisType = module
     }
-  });
-  $('.pwd__btn').click(function(){
-    if($(this).hasClass('pwd__btn--next')){
-      stepNext();
-    }else{
-      stepPre();
+    this.stepNext = () => {
+      if(state[state.thisType].steps <2){
+        state[state.thisType].steps ++
+        $(state[state.thisType].change).toggle()
+      }
     }
-  });
-}
-
-function switchModule (module) {
-  $(".pwd").attr("class",`pwd pwd--${module}`)
-  state.thisType = module;
-}
-
-function stepNext(){
-  let thisType = state[state.thisType];
-  if(thisType.steps <2){
-    thisType.steps ++;
-    changeDomState(thisType)
+    this.stepPre = () => {
+      if(state[state.thisType].steps >1){
+        state[state.thisType].steps --
+        $(state[state.thisType].change).toggle()
+      }
+    }
   }
-}
-
-function stepPre(){
-  let thisType = state[state.thisType];
-  if(thisType.steps >1){
-    thisType.steps --;
-    changeDomState(thisType)
+  init () {
+    $('.pwd__title').click(e => {
+      if($(e.target).hasClass('pwd__mobileTitle')){
+        this.switchModule('mobile')
+      }else if($(e.target).hasClass('pwd__emailTitle')){
+        this.switchModule('email')
+      }
+    })
+    $('.pwd__btn').click(e => {
+      if($(e.target).hasClass('pwd__btn--next')){
+        this.stepNext()
+      }else{
+        this.stepPre()
+      }
+    })
   }
+<<<<<<< 31ede8867a03e52c7bed7a51bc8e0bc6cf4b7c4f
 }
 <<<<<<< 5bb0c03501bbb18992f79931e2771bd8c628b69d
 =======
@@ -75,3 +76,6 @@ export default init;
 //   }
 // } 
 >>>>>>> 找回密码，交互ing
+=======
+}
+>>>>>>> 找回密码2
