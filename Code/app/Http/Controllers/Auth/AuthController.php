@@ -98,9 +98,9 @@ class AuthController extends Controller
     /**
      * 忘记密码
      */
-    public function getForgetpwd()
+    public function getPassword()
     {
-        return view('auth/forgetpwd');
+        return view('auth/password');
     }
 
     /**

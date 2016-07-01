@@ -11,13 +11,14 @@ Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-// 忘记密码
-Route::get('auth/forgetpwd', 'Auth\AuthController@getForgetpwd');
 // 与发送短信相关
 Route::controller('sms', 'Utils\SmsController');
 
 // 与验证相关
 Route::controller('verify', 'Utils\ValidateController');
+
+// 忘记密码
+Route::get('auth/password', 'Auth\AuthController@getPassword');
 
 // Api 部分
 Route::post('api', 'APIController@gateway');
