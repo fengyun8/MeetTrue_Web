@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     </head>
-    <body class="@yield('body-class')">
+    <body class="@yield('body-class')" data-module="@yield('module')">
         @include('svg.all')
         <nav class="nav">
             <div class="nav__content u-clearfix">

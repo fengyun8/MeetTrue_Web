@@ -1,8 +1,8 @@
 export default class Password {
-  constructor (name) {
-    this.name = name;
+  constructor () {
+    this.name = 'mobile';
   }
-  sayName () {
+  init () {
     console.log(this.name);
   }
 } 

@@ -1,6 +1,7 @@
 @extends('app')
 @section('title', '找回密码')
 @section('body-class', 'password')
+@section('module','password qwe asd')
 @section('right-nav')
   <a href="/auth/login" class="u-fontSizeSmaller link link--dark" >登录</a>
   <a href="/auth/register" class="u-fontSizeSmaller link link--dark" >注册</a>
@@ -15,7 +16,7 @@
       <div class="pwd__mobile">
         <form action="./mobile" method="POST">
           {!! csrf_field() !!}
-          <p class="u-pt35 from__error" data-error='手机号格式错误'>
+          <p class="u-pt35 form__error" data-error='手机号格式错误'>
             <input type="mobile" class="input u-sizeFullWidth" placeholder="输入手机号">
           </p>
           <p class="pwd__verifyCodeBox u-pt35">
