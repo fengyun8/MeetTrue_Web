@@ -19,10 +19,10 @@ trait ReturnTrait
      * @param  [type] $data  [description]
      * @return [type]       [description]
      */
-    public function jsonReturn($code, $msg = NULL, $data = NULL)
+    public function jsonReturn($code, $msg = null, $data = null)
     {
         // Handle Success Msg
-        if ($msg == NULL && $code == StatusCodeEnum::SUCCESS_CODE) {
+        if ($msg == null && $code == StatusCodeEnum::SUCCESS_CODE) {
             $msg = $this->sysMessage(StatusCodeEnum::SUCCESS_CODE);
         }
 
