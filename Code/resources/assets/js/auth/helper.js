@@ -12,5 +12,12 @@ export function countdown(seconds, display) {
 }
 
 export function postSmsCode(mobile) {
-  console.log(mobile)
+  $.ajax({
+    type: 'POST',
+    url: '/sms/send-code',
+    data: { mobile: mobile },
+    success: function (response) {
+      return response
+    }
+  })
 }

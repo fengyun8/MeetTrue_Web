@@ -19,7 +19,7 @@
             @else
                 <div class="form__field">
             @endif
-                <input class="input u-sizeFullWidth" type="text" id="mobile" name="mobile" value="{{ old('mobile') }}" placeholder="输入手机号">
+                <input class="input u-sizeFullWidth" type="text" id="mobile" name="mobile" placeholder="输入手机号">
             </div>
             @if ($errors->has('verifyCode'))
                 <div class="form__field u-positionRelative form__error" data-error="{{ $errors->first('mobile')}}">
