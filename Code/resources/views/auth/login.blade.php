@@ -13,12 +13,12 @@
                 <span class="u-floatRight u-textColorGray6f">寻找最有价值的自己</span>
             </p>
             <div class="form__field">
-                <input class="form__input u-sizeFullWidth" type="text" name="email" value="{{ old('email') }}" placeholder="输入邮箱/手机号">
+                <input class="form__input u-sizeFullWidth" type="text" name="credential" placeholder="输入邮箱/手机号">
             </div>
             <div class="form__field u-positionRelative">
                 <input class="form__input u-sizeFullWidth" type="password" name="password" id="password" placeholder="输入密码">
-                <svg class="svg svg--eyeClosed is-active"><use xlink:href="#eye-closed" /></svg>
-                <svg class="svg svg--eyeOpening"><use xlink:href="#eye-open" /></svg>
+                <svg class="svg svg--switch is-visible"><use y="5" xlink:href="#eye-closed" /></svg>
+                <svg class="svg svg--switch"><use xlink:href="#eye-opening" /></svg>
             </div>
             <a href="#" class="u-floatRight u-TextColorGraya7 u-paddingTop10">忘记密码?</a>
             <button class="btn btn__auth u-sizeFullWidth" type="submit">登录</button>

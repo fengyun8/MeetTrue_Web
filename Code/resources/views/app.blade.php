@@ -19,7 +19,7 @@
                 </div>
             </div>
         </nav>
-        <div class="content">
+        <div class="content" id="app">
             <div class="surface">
                 @yield('content')
             </div>
