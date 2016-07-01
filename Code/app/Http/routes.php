@@ -14,8 +14,10 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 // 与发送短信相关
 Route::controller('sms', 'Utils\SmsController');
 
-// 与验证相关
-Route::controller('verify', 'Utils\ValidateController');
+// 与验证相关:1.验证手机唯一，2:生成图片验证码；3：图片验证码验证
+Route::post('verify/phone-unique', 'Utils\ValidateController@phoneUnique');
+Route::get('pic-code/create', 'Utils\ValidateController@createPicCode');
+Route::post('pic-code/verify', 'Utils\ValidateController@verifyPicCode');
 
 // 忘记密码
 Route::get('auth/password', 'Auth\AuthController@getPassword');

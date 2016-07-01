@@ -21,7 +21,7 @@
           </p>
           <p class="pwd__verifyCodeBox u-pt35">
             <input type="text" class="input u-sizeFullWidth" placeholder="输入验证码">
-            <img class="pwd__verifyCode" src="http://images.meet-true.com/default/201605/kunjugn1pxvc9aqt.jpg@980w_456h" alt="">
+            <img class="pwd__verifyCode" src="{{ url('pic-code/create')}}" alt="">
           </p>
           <p class="input u-flexBetweenNowrap pwd__formGroup">
             <input type="text" class="input__noStyle" placeholder="输入手机验证码">
