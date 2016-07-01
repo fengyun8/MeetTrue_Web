@@ -16,6 +16,18 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers;
 
     /**
+     * 登录成功跳转的路径，这里按要求自己设置
+     * @var string
+     */
+    protected $redirectPath = '/';
+
+    /**
+     * 登录失败跳转的路径
+     * @var string
+     */
+    protected $loginPath = '/login';
+
+    /**
      * 构造函数，所有的函数经过guest中间件的验证
      */
     public function __construct()
@@ -62,7 +74,7 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'password' => 'required|min:6',
+            'password' => 'required|min:6｜max:12',
             'mobile'     => 'required|zh_mobile|unique:users',
             'verifyCode' => 'required|verify_code',
         ]);
@@ -105,5 +117,32 @@ class AuthController extends Controller
         }
 
         return $result;
+    }
+
+    /**
+     * 用户使用邮件或者手机号登录
+     * @param  Request $request 
+     * @return [type]           [description]
+     */
+    public function postLogin(Request $request)
+    {
+        $credentials = $request->input('credential');
+        $password = $request->input('password');
+        $remember = $request->has('remember');
+
+        if($credentials == '' || $password == '') {
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '帐号和密码都不能为空');
+        }
+
+        // 尝试登录,成功则成为已登录状态
+        $result = Auth::attempt(['email' => $credentials, 'password' => $password], $remember) || Auth::attempt(['mobile' => $credentials, 'password' => $password], $remember);
+        
+        if(!$result) {
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '账户和密码不匹配');
+        } elseif ($request->has('redirect_url')) {
+            return redirect()->to($request->input('redirect_url'));
+        } else {
+            return redirect()->intended($this->redirectPath());
+        }
     }
 }
