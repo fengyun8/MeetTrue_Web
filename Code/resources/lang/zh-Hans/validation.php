@@ -92,10 +92,10 @@ return [
         'mobile' => [
             'unique' => '该手机号已经被注册',
             'zh_mobile' => '请输入正确的手机号',
+            'confirm_mobile_not_change' => '该手机号不是接受短信的手机号'
         ],
         'verifyCode' => [
             'verify_code' => '验证码错误',
-           
         ],
     ],
 

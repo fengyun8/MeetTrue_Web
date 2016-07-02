@@ -8,6 +8,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Enums\StatusCodeEnum;
 use SmsManager;
+use Validator;
+use Input;
+use App\User;
+use Auth;
 
 /**
  * 短信发送，SmsManager门面对应 vendor\Topan\LaravelSms\SmsManager
@@ -73,5 +77,37 @@ class SmsController extends Controller
         }
 
         return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE, '验证码成功发送，请立即验证');
+    }
+
+       /**
+     * 验证短信码是否正确
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function postVerifyCode(Request $request) 
+    {
+        $mobile = $request->input('mobile');
+        $data = Input::all();
+        $data['mobile_rule'] = 'mobile_required';
+        $validator = Validator::make($data, [
+        'mobile'     => 'required|confirm_mobile_not_change',
+        'verifyCode' => 'required|verify_code|confirm_rule:mobile,mobile_required',
+        ]);
+
+        if ($validator->fails()) {
+            SmsManager::forgetState();
+
+            return $this->jsonReturn(
+                StatusCodeEnum::ERROR_CODE,
+                $this->formatErrors($validator)
+            );
+        }
+
+        $user = User::where('mobile', $mobile)->first();
+        Auth::login($user);
+        return $this->jsonReturn(
+            StatusCodeEnum::SUCCESS_CODE,
+            'success'
+        );
     }
 }

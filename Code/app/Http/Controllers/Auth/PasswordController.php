@@ -39,7 +39,7 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+       // $this->middleware('guest', ['except' => 'postResetByPhone']);
     }
 
     /**
@@ -77,7 +77,9 @@ class PasswordController extends Controller
 
     public function postResetByPhone(Request $request)
     {
+        $data['mobile'] = $request->input('mobile');
         $data['password'] = $request->input('password');
+        $data['password_confirmation'] = $request->input('password_confirmation');
 
         $validator = Validator::make($data, [
         'password'     => 'required|min:6|max:12|confirmed'
@@ -92,18 +94,27 @@ class PasswordController extends Controller
         }
         if (Auth::check()) {
             $user = Auth::user();
-            $user->password = bcrypt($data['password']);
-            $user->save();
+            if($user->mobile == $data['mobile']) {
+                $user->password = bcrypt($data['password']);
+                $user->save();
 
-            Auth::logout();
-            return $this->jsonReturn(
-                StatusCodeEnum::SUCCESS_CODE,
-                '密码重置成功'
-            );
+                Auth::logout();
+                return $this->jsonReturn(
+                    StatusCodeEnum::SUCCESS_CODE,
+                    '密码重置成功'
+                );
+            } else {
+                return $this->jsonReturn(
+                    StatusCodeEnum::ERROR_CODE,
+                    '密码重置手机验证失败'
+                );
+            }
+        }
 
         return $this->jsonReturn(
             StatusCodeEnum::ERROR_CODE,
             '密码重置失败'
-        }
+        );
     }
+
 }

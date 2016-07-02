@@ -132,6 +132,7 @@ class AuthController extends Controller
         // 尝试登录,成功则成为已登录状态
         $result = Auth::attempt(['email' => $credentials, 'password' => $password], $remember) || Auth::attempt(['mobile' => $credentials, 'password' => $password], $remember);
         
+        dd($result);
         if(!$result) {
             return redirect($this->loginPath())
                 ->withErrors(['errors' => '账户和密码不匹配']);

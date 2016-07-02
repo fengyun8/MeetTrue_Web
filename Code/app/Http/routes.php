@@ -12,13 +12,15 @@ Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // 与发送短信相关
-Route::controller('sms', 'Utils\SmsController');
+Route::get('sms/info', 'Utils\SmsController@getInfo');
+Route::post('sms/send-code', 'Utils\SmsController@postSendCode');
+Route::post('sms/verify-code', 'Utils\SmsController@postVerifyCode');
+
 
 // 与验证相关:1.验证手机唯一，2:生成图片验证码；3：图片验证码验证
 Route::post('verify/phone-unique', 'Utils\ValidateController@phoneUnique');
 Route::get('pic/create-code', 'Utils\ValidateController@createPicCode');
 Route::post('pic/verify-code', 'Utils\ValidateController@verifyPicCode');
-Route::post('sms/verify-code', 'Utils\ValidateController@verifySmsCode');
 
 // 忘记密码
 Route::get('auth/password', 'Auth\AuthController@getPassword');
@@ -29,7 +31,6 @@ Route::post('api', 'APIController@gateway');
 Route::controller('file', 'File\FileController');
 
 //后台 admin
-// Route::group(['namespace' => 'Admin'], function()
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
   Route::get('/admin', 'AdminController@index');
@@ -53,5 +54,5 @@ Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
     Route::post('reset', 'PasswordController@postReset');
 
     //手机重置密码
-    Route::post('reset-phone', 'PasswordController@postResetByPhone');
+    Route::post('reset-by-phone', 'PasswordController@postResetByPhone');
 });
