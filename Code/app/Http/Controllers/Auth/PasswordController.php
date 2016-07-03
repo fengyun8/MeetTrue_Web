@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Mail\Message;
 use Exception;
 use Monolog\Logger;
-use Auth;
+use App\User;
 use Validator;
 
 class PasswordController extends Controller
@@ -77,12 +77,11 @@ class PasswordController extends Controller
 
     public function postResetByPhone(Request $request)
     {
-        $data['mobile'] = $request->input('mobile');
         $data['password'] = $request->input('password');
         $data['password_confirmation'] = $request->input('password_confirmation');
 
         $validator = Validator::make($data, [
-        'password'     => 'required|min:6|max:12|confirmed'
+            'password'     => 'required|min:6|max:12|confirmed'
         ]);
 
         if ($validator->fails()) {
@@ -92,29 +91,21 @@ class PasswordController extends Controller
                 $this->formatErrors($validator)
             );
         }
-        if (Auth::check()) {
-            $user = Auth::user();
-            if($user->mobile == $data['mobile']) {
-                $user->password = bcrypt($data['password']);
-                $user->save();
 
-                Auth::logout();
-                return $this->jsonReturn(
-                    StatusCodeEnum::SUCCESS_CODE,
-                    '密码重置成功'
-                );
-            } else {
-                return $this->jsonReturn(
-                    StatusCodeEnum::ERROR_CODE,
-                    '密码重置手机验证失败'
-                );
-            }
+        $user = User::where('remember_token', $request->input('token'))->first();
+        if ($user) {
+            $user->password = bcrypt($data['password']);
+            $user->save();
+
+            return $this->jsonReturn(
+                StatusCodeEnum::SUCCESS_CODE,
+                '密码重置成功'
+            );
+        } else {
+            return $this->jsonReturn(
+                StatusCodeEnum::ERROR_CODE,
+                '非正常渠道重置密码，失败'
+            );
         }
-
-        return $this->jsonReturn(
-            StatusCodeEnum::ERROR_CODE,
-            '密码重置失败'
-        );
     }
-
 }

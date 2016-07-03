@@ -86,28 +86,48 @@ class SmsController extends Controller
      */
     public function postVerifyCode(Request $request) 
     {
-        $mobile = $request->input('mobile');
-        $data = Input::all();
-        $data['mobile_rule'] = 'mobile_required';
-        $validator = Validator::make($data, [
-        'mobile'     => 'required|confirm_mobile_not_change',
-        'verifyCode' => 'required|verify_code|confirm_rule:mobile,mobile_required',
-        ]);
+         $mobile = $request->input('mobile');
+        // $data = Input::all();
+        // $data['mobile_rule'] = 'mobile_required';
+        // $validator = Validator::make($data, [
+        // 'mobile'     => 'required|confirm_mobile_not_change',
+        // 'verifyCode' => 'required|verify_code|confirm_rule:mobile,mobile_required',
+        // ]);
 
-        if ($validator->fails()) {
-            SmsManager::forgetState();
+        // if ($validator->fails()) {
+        //     SmsManager::forgetState();
+
+        //     return $this->jsonReturn(
+        //         StatusCodeEnum::ERROR_CODE,
+        //         $this->formatErrors($validator)
+        //     );
+        // }
+
+        if(Auth::check()) {
+            $user = Auth::user();
+            $user->mobile = $mobile;
+            $user->save();
 
             return $this->jsonReturn(
-                StatusCodeEnum::ERROR_CODE,
-                $this->formatErrors($validator)
+                StatusCodeEnum::SUCCESS_CODE,
+                '手机重新绑定成功'
             );
-        }
 
-        $user = User::where('mobile', $mobile)->first();
-        Auth::login($user);
-        return $this->jsonReturn(
-            StatusCodeEnum::SUCCESS_CODE,
-            'success'
-        );
+        } elseif ($user = User::where('mobile', $mobile)->first()) {
+            $user->remember_token = $token = str_random(60);
+            $user->save();
+
+            return $this->jsonReturn(
+                StatusCodeEnum::SUCCESS_CODE,
+                'success', 
+                compact('token')
+            ); 
+
+        } else {
+            return $this->jsonReturn(
+                StatusCodeEnum::ERROR_CODE,
+                '账户不存在'
+            ); 
+        }
     }
 }
