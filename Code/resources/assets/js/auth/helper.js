@@ -1,4 +1,5 @@
 export function countdown(seconds, display) {
+  display.setAttribute('disabled', true)
   var timer = setInterval(function() {
     seconds--
     if( seconds === 0) {
@@ -31,7 +32,7 @@ export function checkMobileRegistered(mobile) {
 }
 
 export function validateMobile(mobile) {
-  var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/
+  var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/
   return reg.test(mobile)
 }
 
@@ -46,15 +47,16 @@ export function validateMobile(mobile) {
  *   pic_code : '验证码错误'
  * })
  * 
- * 函数会从自身开始沿DOM树向上查找class中存在form__error的元素，并添加错误信息
+ * 函数会从自身开始沿DOM树向上查找存在属性data-error的元素，并添加错误信息
  */
 export function formPopError(errorObj) {
-  $('.form__error').attr('data-error','');
+  $('[data-error]').attr('data-error','').removeClass('form__error');
   !!errorObj && $.each(errorObj,function(k,v){
     var ele = $(`[name="${k}"]`)
-    var errorElement = ele.hasClass("form__error")? ele : ele.parents(".form__error")
+    var errorElement = ele.is("[data-error]")? ele : ele.parents("[data-error]")
+    v = typeof(v) == "object" ? v[0] : v
     if(errorElement.length > 0){
-      errorElement.attr("data-error",v)
+      errorElement.attr("data-error",v).addClass('form__error')
     }else{
       console.error(`auth/helper.js formPopError() 找不到name属性为${k}的错误元素`)
     }

@@ -310,7 +310,6 @@ class SmsManager
     public function getCanResendTime()
     {
         $key = $this->generateKey(self::CAN_RESEND_UNTIL_KEY);
-
         return (int) self::storage()->get($key, 0);
     }
 

@@ -8,7 +8,6 @@ export default class Register {
       if(mobile && !mobileField.hasClass('form__error')) {
         countdown(10, e.target)
       }
-      e.target.setAttribute('disabled', true)
       var mobile = $('#mobile').val().trim()
       if (mobile.length) {
         postSmsCode(mobile)

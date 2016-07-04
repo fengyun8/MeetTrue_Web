@@ -49,7 +49,6 @@ class SmsController extends Controller
 
         $res = SmsManager::validateSendable($interval);
         if (!$res['success']) {
-
             return $this->jsonReturn(
                 StatusCodeEnum::ERROR_CODE, 
                 $res['message']
@@ -87,21 +86,21 @@ class SmsController extends Controller
     public function postVerifyCode(Request $request) 
     {
          $mobile = $request->input('mobile');
-        // $data = Input::all();
-        // $data['mobile_rule'] = 'mobile_required';
-        // $validator = Validator::make($data, [
-        // 'mobile'     => 'required|confirm_mobile_not_change',
-        // 'verifyCode' => 'required|verify_code|confirm_rule:mobile,mobile_required',
-        // ]);
+        $data = Input::all();
+        $data['mobile_rule'] = 'mobile_required';
+        $validator = Validator::make($data, [
+        'mobile'     => 'required|confirm_mobile_not_change',
+        'verifyCode' => 'required|verify_code|confirm_rule:mobile,mobile_required',
+        ]);
 
-        // if ($validator->fails()) {
-        //     SmsManager::forgetState();
+        if ($validator->fails()) {
+            SmsManager::forgetState();
 
-        //     return $this->jsonReturn(
-        //         StatusCodeEnum::ERROR_CODE,
-        //         $this->formatErrors($validator)
-        //     );
-        // }
+            return $this->jsonReturn(
+                StatusCodeEnum::ERROR_CODE,
+                $this->formatErrors($validator)
+            );
+        }
 
         if(Auth::check()) {
             $user = Auth::user();

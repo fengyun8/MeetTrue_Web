@@ -97,6 +97,12 @@ class AuthController extends Controller
         return view('auth/password');
     }
 
+
+    public function getResetSuccess()
+    {
+        return view('auth/resetSuccess');
+    }
+
     /**
      * 刚注册的nickname给一个mt_随机整数
      * @return String  [eg: mt_0845297613]

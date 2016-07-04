@@ -122,6 +122,7 @@ class PasswordController extends Controller
 
     public function postResetByPhone(Request $request)
     {
+        $token = $request->input('token','这里千万不要去掉@#$&*_)(*');
         $data['password'] = $request->input('password');
         $data['password_confirmation'] = $request->input('password_confirmation');
 
@@ -137,7 +138,7 @@ class PasswordController extends Controller
             );
         }
 
-        $user = User::where('remember_token', $request->input('token'))->first();
+        $user = User::where('remember_token', $token)->first();
         if ($user) {
             $user->password = bcrypt($data['password']);
             $user->save();

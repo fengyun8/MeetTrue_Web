@@ -3,5 +3,5 @@ export function buildBasePath(path){
 }
 
 export function isMobile(mobile){
-  return /^1[3|4|5|8]\d{9}$/.test(mobile)
+  return /^1[3|4|5|7|8]\d{9}$/.test(mobile)
 }

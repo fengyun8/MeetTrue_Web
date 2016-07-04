@@ -24,6 +24,7 @@ Route::post('pic/verify-code', 'Utils\ValidateController@verifyPicCode');
 
 // 忘记密码
 Route::get('auth/password', 'Auth\AuthController@getPassword');
+Route::get('auth/reset-success', 'Auth\AuthController@getResetSuccess');
 
 // Api 部分
 Route::post('api', 'APIController@gateway');

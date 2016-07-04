@@ -1,6 +1,8 @@
 .btn__noStyle,
 .input__noStyle
   btn-clean()
+  &:disabled
+    cursor no-drop
   
 .btn__full,
 .input__full
@@ -37,6 +39,8 @@
   box-sizing border-box
   border 1px solid dark-gray
   transition background-color 0.25s cubic-bezier(0.215, 0.61, 0.355, 1)
+  &:disabled
+    cursor no-drop
 
 .btn__auth
   border none
@@ -69,6 +73,14 @@
   
 
 // input
+.input,
+.input__borderBottom
+  btn-clean()
+  border-bottom 1px solid gray-cc
+  line-height 18px
+  color gray-a7
+  padding 6px 0
+
 .input__bootcss,
 .input__addon
   border 1px solid gray-cc
@@ -78,10 +90,6 @@
   outline none
   box-shadow inset 0 1px 1px rgba(0,0,0,.075)
   
-.input,
-.input__borderBottom
-  btn-clean()
-  border-bottom 1px solid gray-cc
-  line-height 18px
-  color gray-a7
-  padding 6px 0
+.form__error,
+.form__error .input
+  border-color red-error

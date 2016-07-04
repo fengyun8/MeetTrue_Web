@@ -2,6 +2,7 @@ import $ from 'jquery'
 import Password from './auth/password'
 import Login from './auth/login'
 import Register from './auth/register'
+import ResetSuccess from './auth/resetSuccess'
 
 window.$ = $;
 
@@ -9,6 +10,7 @@ var moduleMap = {};
 moduleMap.password = new Password();
 moduleMap.login = new Login();
 moduleMap.register = new Register();
+moduleMap.resetSuccess = new ResetSuccess();
 
 /**
  * 模块启动方法
