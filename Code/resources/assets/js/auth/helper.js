@@ -21,3 +21,16 @@ export function postSmsCode(mobile) {
     }
   })
 }
+
+export function checkMobileRegistered(mobile) {
+  return $.ajax({
+    type: 'POST',
+    url: '/verify/phone-unique',
+    data: { mobile: mobile }
+  })
+}
+
+export function validateMobile(mobile) {
+  var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/
+  return reg.test(mobile)
+}

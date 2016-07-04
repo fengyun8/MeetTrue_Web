@@ -13,12 +13,10 @@
                 <span class="u-fontSizeLarge">觅处｜Meet-True</span>
                 <span class="u-floatRight u-textColorGray6f">寻找最有价值的自己</span>
             </p>
-            @yield('fields')
-
             @if ($errors->has('mobile'))
                 <div class="form__field form__error" data-error="{{ $errors->first('mobile')}}">
             @else
-                <div class="form__field">
+                <div class="form__field form__error">
             @endif
                 <input class="input u-sizeFullWidth" type="text" id="mobile" name="mobile" placeholder="输入手机号">
             </div>
