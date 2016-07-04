@@ -21,8 +21,11 @@ class LoginEvent extends Event
      *
      * @return void
      */
-    public function __construct(Request $request, User $user)
+    public function __construct(User $user)
     {
+        // Get Request instance
+        $request = request();
+
         // Operate Log Data
         $this->operateLog['operator_id'] = $user['id'];
         $this->operateLog['user_id'] = $user['id'];
