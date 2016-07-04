@@ -48,7 +48,9 @@ class UserRolePermissionInsert extends Command
          */
         // add user
         User::create([
-            'nickname' => 'testuser'
+            'nickname' => 'testuser',
+            'email' => '2@qq.com',
+            'mobile' => '13811112222',
         ]);
 
 
