@@ -17,6 +17,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\LoginEvent' => [
             'App\Listeners\OperateLogEventListener',        // 记录操作日志
         ],
+        // Login Event
+        'App\Events\ResetPasswordEvent' => [
+            'App\Listeners\OperateLogEventListener',        // 记录操作日志
+        ],
     ];
 
     /**

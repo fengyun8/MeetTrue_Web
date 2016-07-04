@@ -272,7 +272,7 @@
                         $this->operateLog['ip'] = $request->ip();
                         // $this->operateLog['extra'] = $request->all();     // 不要包含敏感的数据
         使用:
-            「Controller」: \Event::fire(new LoginEvent($request, auth()->user()));
+            「Controller」: \Event::fire(new LoginEvent(auth()->user()));
 
     13. 邮件
         作用:

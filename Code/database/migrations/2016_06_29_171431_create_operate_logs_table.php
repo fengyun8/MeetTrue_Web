@@ -16,7 +16,7 @@ class CreateOperateLogsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('operator_id')->default(0)->comment('操作人id');
             $table->bigInteger('user_id')->default(0)->comment('用户id');
-            $table->smallInteger('type')->default(0)->comment('Operate Log类型: 0:未知;1:登陆;2:退出;');
+            $table->smallInteger('type')->default(0)->comment('Operate Log类型: 0:未知;1:登陆;2:退出;3：邮箱找回密码;4:手机找回密码;');
             $table->string('ip')->comment('操作ip');
             $table->string('extra')->comment('扩展列, 存储json类型数据');
             $table->timestamps();

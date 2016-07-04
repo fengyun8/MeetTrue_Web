@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\OperateLogTypeEnum;
 use App\Enums\StatusCodeEnum;
+use App\Events\ResetPasswordEvent;
 use App\Http\Controllers\Controller;
 use App\Utils\LogUtil;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -13,6 +15,7 @@ use Exception;
 use Monolog\Logger;
 use App\User;
 use Validator;
+use Auth;
 
 class PasswordController extends Controller
 {
@@ -72,6 +75,48 @@ class PasswordController extends Controller
 
             case Password::INVALID_USER:
                 return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans($response));
+        }
+    }
+
+    /**
+     * Reset the given user's password.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function postResetByEmail(Request $request)
+    {
+        $this->validate($request, [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $credentials = $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
+
+        // Reset Password
+        $response = Password::reset($credentials, function ($user, $password) {
+            // Help the user login the system
+            $this->resetPassword($user, $password);
+        });
+
+        // return
+        switch ($response) {
+            case Password::PASSWORD_RESET:
+
+                // Operate Log
+                \Event::fire(new ResetPasswordEvent(Auth::user(), OperateLogTypeEnum::RESET_PASSWORD_BY_EMAIL, [
+                    'email' => $request->input('email')
+                ]));
+                // Logout
+                Auth::logout();
+
+                return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
+
+            default:
+                return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['email' => trans($response)]);
         }
     }
 

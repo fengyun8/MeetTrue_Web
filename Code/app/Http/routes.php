@@ -51,7 +51,7 @@ Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
 
     // 密码重置的路由...
     Route::get('reset/{token}', 'PasswordController@getReset');
-    Route::post('reset', 'PasswordController@postReset');
+    Route::post('reset', 'PasswordController@postResetByEmail');
 
     //手机重置密码
     Route::post('reset-by-phone', 'PasswordController@postResetByPhone');
