@@ -6,6 +6,4 @@ Homestead.json
 .env
 .idea
 /storage
-/public/css
-/public/js
 *.log
