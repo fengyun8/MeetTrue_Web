@@ -19,11 +19,11 @@
           <p class="u-pt35 form__error" data-error=''>
             <input type="mobile" name="mobile" class="input u-sizeFullWidth" placeholder="输入手机号">
           </p>
-          <p class="pwd__verifyCodeBox u-pt35">
+          <p class="pwd__verifyCodeBox u-pt35 form__error">
             <input type="text" name="pic_code" class="input u-sizeFullWidth" placeholder="输入验证码">
-            <img class="pwd__verifyCode" src="{{ url('pic-code/create')}}" alt="">
+            <img class="pwd__verifyCode" src="{{ url('pic/create-code')}}" alt="">
           </p>
-          <p class="pwd__mobileCodeBox input u-flexBetweenNowrap pwd__formGroup" style="display: none;">
+          <p class="pwd__mobileCodeBox input u-flexBetweenNowrap pwd__formGroup form__error" style="display: none;">
             <input type="text" class="input__noStyle" placeholder="输入手机验证码">
             <button type="button" class="btn__noStyle u-fontSizeSmaller u-TextColorGraya7">已发送验证码 60s</button>
           </p>

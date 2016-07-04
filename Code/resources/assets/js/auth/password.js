@@ -1,4 +1,5 @@
 import {buildBasePath,isMobile} from './../utils'
+import {formPopError} from './helper'
 
 var state = {
   mobile:{
@@ -34,19 +35,22 @@ export default class Password {
       }
     }
     this.checkMobile = () => {
-      let mobile = $('.pwd__mobile [type="mobile"]');
+      let mobile = $('.pwd__mobile [type="mobile"]')
       if(!isMobile(mobile.val())){
-        mobile.parent().attr('data-error','手机号格式错误');
-        return state[state.thisType].isRight = false;
+        mobile.parent().attr('data-error','手机号格式错误')
+        return state[state.thisType].isRight = false
       }
-      mobile.parent().attr('data-error','');
-      return state[state.thisType].isRight = true;
+      mobile.parent().attr('data-error','')
+      return state[state.thisType].isRight = true
     }
-    this.checkVrCode = () => {
-      $.post(buildBasePath('/pic-code/verify'),$('.pwd__mobile form').serialize())
-        .done(data => {
-          console.log('test');
-        });
+    this.checkVrCode = () => $.post(buildBasePath('/pic/verify-code'),$('.pwd__mobile form').serialize())
+    this.popMobileError = data => {
+      if(data.status_code == 200){
+        formPopError()
+        this.stepNext()
+      }else{
+        formPopError(data.msg)
+      }
     }
   }
   init () {
@@ -59,14 +63,15 @@ export default class Password {
     })
     $('.pwd__btn').click(e => {
       if($(e.target).hasClass('pwd__btn--next')){
-        // this.checkMobile() && this.stepNext();
+        // this.checkMobile() && this.stepNext()
         this.checkVrCode()
+          .done(this.popMobileError)
       }else{
         this.stepPre()
       }
     })
     $(".pwd__verifyCode").click(e => {
-      $(e.target).attr('src',buildBasePath('/pic-code/create') + "?" + Math.random());
+      $(e.target).attr('src',buildBasePath('/pic/create-code') + "?" + Math.random())
     })
   }
 }
