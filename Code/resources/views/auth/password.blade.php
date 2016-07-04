@@ -16,11 +16,11 @@
       <div class="pwd__mobile">
         <form action="./mobile" method="POST">
           {!! csrf_field() !!}
-          <p class="u-pt35 form__error" data-error='手机号格式错误'>
-            <input type="mobile" class="input u-sizeFullWidth" placeholder="输入手机号">
+          <p class="u-pt35 form__error" data-error=''>
+            <input type="mobile" name="mobile" class="input u-sizeFullWidth" placeholder="输入手机号">
           </p>
           <p class="pwd__verifyCodeBox u-pt35">
-            <input type="text" class="input u-sizeFullWidth" placeholder="输入验证码">
+            <input type="text" name="pic_code" class="input u-sizeFullWidth" placeholder="输入验证码">
             <img class="pwd__verifyCode" src="{{ url('pic-code/create')}}" alt="">
           </p>
           <p class="pwd__mobileCodeBox input u-flexBetweenNowrap pwd__formGroup" style="display: none;">

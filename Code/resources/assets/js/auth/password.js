@@ -1,8 +1,11 @@
+import {buildBasePath,isMobile} from './../utils'
+
 var state = {
   mobile:{
     steps: 1,
     max: 3,
-    change: ".pwd__verifyCodeBox,.pwd__loginBtnBox,.pwd__mobileCodeBox,.pwd__findBtnBox"
+    change: ".pwd__verifyCodeBox,.pwd__loginBtnBox,.pwd__mobileCodeBox,.pwd__findBtnBox",
+    isRight: true
   },
   email:{
     steps: 1,
@@ -30,6 +33,21 @@ export default class Password {
         $(state[state.thisType].change).toggle()
       }
     }
+    this.checkMobile = () => {
+      let mobile = $('.pwd__mobile [type="mobile"]');
+      if(!isMobile(mobile.val())){
+        mobile.parent().attr('data-error','手机号格式错误');
+        return state[state.thisType].isRight = false;
+      }
+      mobile.parent().attr('data-error','');
+      return state[state.thisType].isRight = true;
+    }
+    this.checkVrCode = () => {
+      $.post(buildBasePath('/pic-code/verify'),$('.pwd__mobile form').serialize())
+        .done(data => {
+          console.log('test');
+        });
+    }
   }
   init () {
     $('.pwd__title').click(e => {
@@ -41,41 +59,14 @@ export default class Password {
     })
     $('.pwd__btn').click(e => {
       if($(e.target).hasClass('pwd__btn--next')){
-        this.stepNext()
+        // this.checkMobile() && this.stepNext();
+        this.checkVrCode()
       }else{
         this.stepPre()
       }
     })
+    $(".pwd__verifyCode").click(e => {
+      $(e.target).attr('src',buildBasePath('/pic-code/create') + "?" + Math.random());
+    })
   }
-<<<<<<< 31ede8867a03e52c7bed7a51bc8e0bc6cf4b7c4f
 }
-<<<<<<< 5bb0c03501bbb18992f79931e2771bd8c628b69d
-=======
-
-function changeDomState(thisType){
-  $(thisType.change).toggle();
-}
-
-export default init;
-
-// class Password {
-//   constructor () {
-//     this.name = 'mobile';
-//   }
-//   init () {
-//     $('.pwd__title').click(function(){
-//       switchModule(123)
-
-//       // if($(this).hasClass('pwd__mobileTitle')){
-
-//       // }else if($(this).hasClass('pwd__mobileTitle'))
-//     })
-//   }
-//   switchModule (module) {
-//     console.log(module);
-//   }
-// } 
->>>>>>> 找回密码，交互ing
-=======
-}
->>>>>>> 找回密码2
