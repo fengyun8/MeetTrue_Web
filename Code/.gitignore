@@ -7,3 +7,5 @@ Homestead.json
 .idea
 /storage
 *.log
+public/css
+public/js
