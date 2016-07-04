@@ -16,7 +16,7 @@
             @if ($errors->has('mobile'))
                 <div class="form__field form__error" data-error="{{ $errors->first('mobile')}}">
             @else
-                <div class="form__field form__error">
+                <div class="form__field">
             @endif
                 <input class="input u-sizeFullWidth" type="text" id="mobile" name="mobile" placeholder="输入手机号">
             </div>
@@ -25,7 +25,7 @@
             @else
                 <div class="form__field u-positionRelative">
             @endif
-                <input class="form__input u-sizeFullWidth" type="text" name="verifyCode" placeholder="输入验证码">
+                <input class="input u-sizeFullWidth" type="text" name="verifyCode" placeholder="输入验证码">
                 <button type="button" class="btn btn--link btn--smsCode u-textColorOrange u-positionAbsolute">获取验证码</button>
             </div>
             <div class="form__field u-positionRelative">
