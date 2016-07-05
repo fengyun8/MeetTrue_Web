@@ -117,7 +117,6 @@ class PasswordController extends Controller
                 return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
 
             default:
-                // TODO token出错时，应该跳转页面
                 return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['email' => trans($response)]);
         }
     }
