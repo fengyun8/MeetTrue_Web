@@ -39,7 +39,6 @@ export default class ResetByEmail{
   init () {
     $(".pwd__email .pwd__btn--full").click(e => {
       var error = this.checkForm()
-      console.log(error,!error);
       if(!error){
         this.resetPwdByEmail()
           .done(this.resetPwdByEmailHandle)

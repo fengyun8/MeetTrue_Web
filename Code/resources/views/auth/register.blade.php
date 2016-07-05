@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', '注册')
 @section('body-class', 'register')
 @section('module', 'register')
 @section('right-nav')

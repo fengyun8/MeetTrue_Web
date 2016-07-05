@@ -1,4 +1,5 @@
 @extends('app')
+@section('title', '登录')
 @section('body-class', 'login')
 @section('module', 'login')
 @section('right-nav')

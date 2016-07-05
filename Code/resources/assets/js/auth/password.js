@@ -93,9 +93,7 @@ export default class Password {
         formPopError()
         location.href = buildBasePath('/password/send-email-success')
       }else{
-        formPopError({
-          email: data.msg
-        })
+        formPopError(data.msg)
       }
     }
 
