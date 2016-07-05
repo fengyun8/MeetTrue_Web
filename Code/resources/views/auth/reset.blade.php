@@ -23,13 +23,13 @@
             </ul>
           @endif
           <p class="u-pt35" data-error>
-            <input class="input u-sizeFullWidth" type="email" name="email" value="{{ old('email') }}" placeholder="输入账号">
+            <input class="input__mt u-sizeFullWidth" type="email" name="email" value="{{ old('email') }}" placeholder="输入账号">
           </p>
           <p class="u-pt35" data-error>
-            <input class="input u-sizeFullWidth" type="password" name="password" placeholder="新的密码6-12位">
+            <input class="input__mt u-sizeFullWidth" type="password" name="password" placeholder="新的密码6-12位">
           </p>
           <p class="u-pt35" data-error>
-            <input class="input u-sizeFullWidth" type="password" name="password_confirmation" placeholder="确认密码">
+            <input class="input__mt u-sizeFullWidth" type="password" name="password_confirmation" placeholder="确认密码">
           </p>
           <p class="u-pt40">
             <button type="button" class="pwd__btn--full btn__auth">确定</button>

@@ -17,6 +17,7 @@ export default class Password {
   constructor () {
     this.state = state
 
+    // 选择模块
     this.switchModule = module => {
       $(".pwd").attr("class",`pwd pwd--${module}`)
       state.thisType = module
@@ -36,16 +37,17 @@ export default class Password {
       }
     }
 
-    this.checkMobile = () => {
-      let mobile = $('.pwd__mobile [type="mobile"]')
-      if(!isMobile(mobile.val())){
-        mobile.parent().attr('data-error','手机号格式错误')
-        return state[state.thisType].isRight = false
-      }
-      mobile.parent().attr('data-error','')
-      return state[state.thisType].isRight = true
-    }
+    // this.checkMobile = () => {
+    //   let mobile = $('.pwd__mobile [type="mobile"]')
+    //   if(!isMobile(mobile.val())){
+    //     mobile.parent().attr('data-error','手机号格式错误')
+    //     return state[state.thisType].isRight = false
+    //   }
+    //   mobile.parent().attr('data-error','')
+    //   return state[state.thisType].isRight = true
+    // }
 
+    // 验证图片验证码
     this.checkVrCode = () => $.post(buildBasePath('/pic/verify-code'),$('.pwd__mobile #mobile').serialize())
 
     this.checkVrCodeHandle = data => {
@@ -57,6 +59,7 @@ export default class Password {
       }
     }
 
+    // 确认手机验证码
     this.checkMobileVrCode = () => $.post(buildBasePath('/sms/verify-code'),$('.pwd__mobile #mobile').serialize())
 
     this.checkMobileVrCodeHandle = data => {
@@ -70,6 +73,7 @@ export default class Password {
       }
     }
 
+    // 手机重置密码确定
     this.resetByMObile = () => $.post(buildBasePath('/password/reset-by-phone'),$('.pwd__mobile #mobilePwd').serialize())
 
     this.resetByMObileHandle = data => {
@@ -122,7 +126,7 @@ export default class Password {
         // 上一步
         this.stepPre()
       }else if($(e.target).hasClass('pwd__checkMobileVrCode')){
-
+        // 确认手机验证码
         this.checkMobileVrCode().done(this.checkMobileVrCodeHandle)
       }
     })

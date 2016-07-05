@@ -1,7 +1,7 @@
 import {countdown, postSmsCode, checkMobileRegistered, validateMobile} from './helper'
 export default class Register {
   init () {
-    $('.btn--smsCode').click(e => {
+    $('.btn__smsCode').click(e => {
       var mobileElement = $('#mobile')
       var mobile = mobileElement.val()
       var mobileField = mobileElement.parent()
@@ -13,6 +13,7 @@ export default class Register {
         postSmsCode(mobile)
       }
     })
+
     $('#mobile').change(e => {
       var mobile = e.target.value
       var errorBox = e.target.parentElement
@@ -33,6 +34,17 @@ export default class Register {
           }
         })
       }
+    })
+
+    var passwordElement = $('#password')
+    $('.svg--switch').click(function(){
+      $('.svg--switch').toggleClass('is-visible')
+      if(passwordElement.attr('type') === 'password') {
+        passwordElement.attr('type', 'text')
+      } else {
+        passwordElement.attr('type', 'password')
+      }
+      passwordElement.focus()
     })
   }
 }

@@ -4,7 +4,7 @@ import Register from './register'
 import ResetSuccess from './resetSuccess'
 import ResetByEmail from './resetByEmail'
 
-export default class auth {
+export default class Auth {
   constructor (moduleMap) {
     moduleMap.password = new Password()
     moduleMap.login = new Login()

@@ -14,14 +14,14 @@
                 <span class="u-floatRight u-textColorGray6f">寻找最有价值的自己</span>
             </p>
             <div class="form__field">
-                <input class="form__input u-sizeFullWidth" type="text" name="credential" placeholder="输入邮箱/手机号">
+                <input class="input__mt u-sizeFullWidth" type="text" name="credential" placeholder="输入邮箱/手机号">
             </div>
             @if ($errors->has('password'))
                 <div class="form__field u-positionRelative form__error" data-error="{{ $errors->first('password')}}">
             @else
                 <div class="form__field u-positionRelative">
             @endif
-                <input class="form__input u-sizeFullWidth" type="password" name="password" id="password" placeholder="输入密码">
+                <input class="input__mt u-sizeFullWidth" type="password" name="password" id="password" placeholder="输入密码">
                 <svg class="svg svg--switch is-visible"><use y="5" xlink:href="#eye-closed" /></svg>
                 <svg class="svg svg--switch"><use xlink:href="#eye-opening" /></svg>
             </div>

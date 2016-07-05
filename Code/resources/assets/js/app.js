@@ -1,10 +1,12 @@
 import $ from 'jquery'
+import Common from './common/common'
 import Auth from './auth/auth'
 
 window.$ = $
 
 var moduleMap = {}
 
+new Common(moduleMap)
 new Auth(moduleMap)
 
 /**

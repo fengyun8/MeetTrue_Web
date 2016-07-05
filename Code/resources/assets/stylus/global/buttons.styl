@@ -1,18 +1,16 @@
+.btn,
 .btn__noStyle,
+.input,
 .input__noStyle
   btn-clean()
   &:disabled
     cursor no-drop
-  
-.btn__full,
-.input__full
-  width 100%
 
- 
+// button
 .btn__group
   display flex
   box-sizing border-box
-  .btn,
+  .btn__bootcss,
   .input__bootcss,
   .input__addon
     border-radius 0
@@ -27,7 +25,7 @@
     flex 0 0 auto
     
 
-.btn
+.btn__bootcss
   outline none
   cursor pointer
   font-weight bold
@@ -45,14 +43,12 @@
 .btn__auth
   border none
   color white
-  font-size 18px
+  font-size 16px
+  padding 0.5em 0
   border-radius 2px
   font-weight normal
   background-color mt-orange
   text-align center
-
-.btn--link
-  border none
 
 .btn--text
   border none
@@ -66,13 +62,20 @@
 .btn--transparent
   background-color transparent
 
-.btn--smsCode
+.btn__smsCode
   font-size 14px
   height 31px
   line-height 32px
   font-weight normal
   bottom 2px
   right 6px
+  
+.btn__search
+  input
+    width 0
+    transition width .3s ease-in-out
+    &:focus
+      width 150px
   
 // 按钮颜色
 .btn--orange
@@ -86,12 +89,13 @@
 
 // input
 .input,
-.input__borderBottom
+.input__mt
   btn-clean()
   border-bottom 1px solid gray-cc
   line-height 18px
   color gray-a7
   padding 6px 0
+  letter-spacing 2px
 
 .input__bootcss,
 .input__addon

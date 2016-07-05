@@ -1,17 +1,19 @@
 export default class Login {
   constructor () {
-    this.passwordElement = $('#password')
-    this.switchElement = $('.svg--switch')
+    this.passwordElement = '#password'
+    this.switchElement = '.svg--switch'
   }
   init () {
-    this.switchElement.click(e => {
-      this.switchElement.toggleClass('is-visible')
-      if(this.passwordElement.attr('type') === 'password') {
-        this.passwordElement.attr('type', 'text')
+    var switchElement = $(this.switchElement)
+    var passwordElement = $(this.passwordElement)
+    switchElement.click(e => {
+      switchElement.toggleClass('is-visible')
+      if(passwordElement.attr('type') === 'password') {
+        passwordElement.attr('type', 'text')
       } else {
-        this.passwordElement.attr('type', 'password')
+        passwordElement.attr('type', 'password')
       }
-      this.passwordElement.focus()
+      passwordElement.focus()
     })
   }
 }

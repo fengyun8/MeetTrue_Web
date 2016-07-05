@@ -18,18 +18,18 @@
             @else
                 <div class="form__field">
             @endif
-                <input class="input u-sizeFullWidth" type="text" id="mobile" name="mobile" placeholder="输入手机号">
+                <input class="input__mt u-sizeFullWidth" type="text" id="mobile" name="mobile" placeholder="输入手机号">
             </div>
             @if ($errors->has('verifyCode'))
                 <div class="form__field u-positionRelative form__error" data-error="{{ $errors->first('verifyCode')}}">
             @else
                 <div class="form__field u-positionRelative">
             @endif
-                <input class="input u-sizeFullWidth" type="text" name="verifyCode" placeholder="输入验证码">
-                <button type="button" class="btn btn--link btn--smsCode u-textColorOrange u-positionAbsolute">获取验证码</button>
+                <input class="input__mt u-sizeFullWidth" type="text" name="verifyCode" placeholder="输入验证码">
+                <button type="button" class="btn btn__smsCode u-textColorOrange u-positionAbsolute">获取验证码</button>
             </div>
             <div class="form__field u-positionRelative">
-                <input class="form__input u-sizeFullWidth" type="password" name="password" id="password" placeholder="输入密码">
+                <input class="input__mt u-sizeFullWidth" type="password" name="password" id="password" placeholder="输入密码">
                 <svg class="svg svg--switch is-visible"><use y="5" xlink:href="#eye-closed" /></svg>
                 <svg class="svg svg--switch"><use xlink:href="#eye-opening" /></svg>
             </div>

@@ -17,13 +17,13 @@
         <form action="./pic/verify-code" id="mobile" method="POST">
           {!! csrf_field() !!}
           <p class="u-pt35" data-error>
-            <input type="mobile" name="mobile" class="input u-sizeFullWidth" placeholder="输入手机号">
+            <input type="mobile" name="mobile" class="input__mt u-sizeFullWidth" placeholder="输入手机号">
           </p>
           <p class="pwd__verifyCodeBox u-pt35" data-error>
-            <input type="text" name="pic_code" class="input u-sizeFullWidth" placeholder="输入验证码">
+            <input type="text" name="pic_code" class="input__mt u-sizeFullWidth" placeholder="输入验证码">
             <img class="pwd__verifyCode" src="{{ url('pic/create-code')}}" alt="">
           </p>
-          <p class="pwd__mobileCodeBox input u-flexBetweenNowrap pwd__formGroup" data-error style="display: none;">
+          <p class="pwd__mobileCodeBox input__mt u-flexBetweenNowrap pwd__formGroup" data-error style="display: none;">
             <input type="text" class="input__noStyle" name="verifyCode" placeholder="输入手机验证码">
             <button type="button" class="pwd__mobileVrCode btn__noStyle u-fontSizeSmaller u-textColorOrange">获取验证码</button>
             <input type="hidden" name="interval" value="60">
@@ -41,10 +41,10 @@
           {!! csrf_field() !!}
           <p class="u-pt35" data-error>
             <input type="hidden" name="token">
-            <input type="password" class="input u-sizeFullWidth" name="password" placeholder="新的密码 6-12位">
+            <input type="password" class="input__mt u-sizeFullWidth" name="password" placeholder="新的密码 6-12位">
           </p>
           <p class="u-pt35" data-error>
-            <input type="password" class="input u-sizeFullWidth" name="password_confirmation" placeholder="确认密码">
+            <input type="password" class="input__mt u-sizeFullWidth" name="password_confirmation" placeholder="确认密码">
           </p>
           <p class="u-pt40 u-flexBetweenNowrap">
             <button type="button" class="pwd__btn btn__auth">确定</button>
@@ -62,7 +62,7 @@
             </ul>
           @endif
           <p class="u-pt35" data-error>
-            <input type="email" name="email" class="input u-sizeFullWidth" value="{{ old('email') }}" placeholder="输入邮箱">
+            <input type="email" name="email" class="input__mt u-sizeFullWidth" value="{{ old('email') }}" placeholder="输入邮箱">
           </p>
           <p class="u-pt40 u-flexBetweenNowrap">
             <a href="{{ url('./auth/login') }}" class="pwd__btn link btn__auth btn--gray">返回注册登录</a>
