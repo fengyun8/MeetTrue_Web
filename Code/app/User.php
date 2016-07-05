@@ -42,4 +42,13 @@ class User extends Model implements AuthenticatableContract,
         // 合并名字
             return $this->last_name . $this->first_name;
     }
+
+    /************************ Service 部分 ************************/
+    /**
+     * update by userId
+     */
+    public static function updateByUserId($userId, $params)
+    {
+        return \App\User::whereId($userId)->update($params);
+    }
 }

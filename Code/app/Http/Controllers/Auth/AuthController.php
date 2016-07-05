@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\CacheKeyPrefixEnum;
+use App\Exceptions\SelfExceptions\ValidatorApiException;
 use App\User;
+use App\Utils\LogUtil;
+use App\Utils\TokenUtil;
+use App\Utils\ValidateTrait;
 use Auth;
+use Illuminate\Support\Arr;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -13,7 +19,7 @@ use SmsManager;
 
 class AuthController extends Controller
 {
-    use AuthenticatesAndRegistersUsers;
+    use AuthenticatesAndRegistersUsers, ValidateTrait;
 
     /**
      * 登录成功跳转的路径，这里按要求自己设置
@@ -33,6 +39,7 @@ class AuthController extends Controller
     public function __construct()
     {
         // $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('auth', ['only' => 'postBindMail']);
     }
 
     /**
@@ -132,5 +139,69 @@ class AuthController extends Controller
         } else {
             return redirect()->intended($this->redirectPath());
         }
+    }
+
+    /**
+     * 绑定邮箱
+     */
+    public function postBindMail(Request $request)
+    {
+        // Get params
+        $email = $request->input('email');
+
+        // Check Email
+        $this->validateForApi($request, [
+            'email' => 'required|email',
+        ]);
+        // Exists Email
+        if (\App\User::where('email', '=', $email)->exists()) {
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans('auth.exists.email'));
+        }
+
+        // 生成 token
+        $token = TokenUtil::createToken();
+
+        // 存入缓存(mt_password_reset)，并设置时间
+        \Cache::put(CacheKeyPrefixEnum::BIND_MAIL . $token, [
+            'email' => $email,
+            'user_id' => \Auth::user()->id
+        ], 24*60);
+
+        // 发送邮件（队列）
+        \Mail::send('emails.bindMail', compact('token'), function ($message) use ($email) {
+            $message->subject('觅处｜Meet－True绑定邮箱 ');
+            $message->to($email);
+        });
+
+        return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
+    }
+
+    /**
+     * 绑定邮箱链接验证
+     */
+    public function getBindMailByToken($token)
+    {
+        // Get email by token
+        $params = \Cache::get(CacheKeyPrefixEnum::BIND_MAIL . $token);
+
+        // Check params
+        if (empty($params)) {
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans('auth.bindMail.token'));
+        }
+        if (!Arr::has($params, 'email') || !Arr::has($params, 'user_id')) {
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans('auth.bindMail.token'));
+        }
+
+        // Update user
+        if (!\App\User::updateByUserId($params['user_id'], ['email' => $params['email']])) {
+            // update fail
+            LogUtil::error('bindMailByToken:用户邮箱更新失败', $params);
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '更新失败');
+        }
+
+        // Delete token
+        \Cache::forget(CacheKeyPrefixEnum::BIND_MAIL . $token);
+
+        return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
     }
 }

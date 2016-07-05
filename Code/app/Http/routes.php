@@ -60,3 +60,11 @@ Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
     // 重置密码成功
     Route::get('reset-success', 'PasswordController@getResetSuccess');
 });
+
+// Auth Route
+Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
+    // 邮箱激活
+    Route::post('bind-mail', 'AuthController@postBindMail');
+    Route::get('bind-mail/{token}', 'AuthController@getBindMailByToken');
+});
+
