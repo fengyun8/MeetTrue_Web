@@ -37,8 +37,10 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 });
 
 Route::get('/', 'PagesController@index');
-// test route
+// TODO test route
 Route::get('test', 'PagesController@test');
+// TODO test route
+Route::get('loginTest', 'PagesController@loginTest');
 
 
 // Password Route

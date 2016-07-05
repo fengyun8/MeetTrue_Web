@@ -31,4 +31,12 @@ class PagesController extends Controller
 //        $username = $request->input('username');
         \Event::fire(new LoginEvent($request, auth()->user()));
     }
+
+    /**
+     * 模拟登陆
+     */
+    public function loginTest(Request $request)
+    {
+        \Auth::loginUsingId(1);
+    }
 }
