@@ -1,7 +1,7 @@
 @extends('app')
 @section('title', '找回密码')
 @section('body-class', 'password')
-@section('module','password qwe asd')
+@section('module','password')
 @section('right-nav')
   <a href="/auth/login" class="u-fontSizeSmaller link link--dark" >登录</a>
   <a href="/auth/register" class="u-fontSizeSmaller link link--dark" >注册</a>
@@ -26,7 +26,7 @@
           <p class="pwd__mobileCodeBox input u-flexBetweenNowrap pwd__formGroup" data-error style="display: none;">
             <input type="text" class="input__noStyle" name="verifyCode" placeholder="输入手机验证码">
             <button type="button" class="pwd__mobileVrCode btn__noStyle u-fontSizeSmaller u-textColorOrange">获取验证码</button>
-            <input type="hidden" name="interval" value="10">
+            <input type="hidden" name="interval" value="60">
           </p>
           <p class="u-pt40 u-flexBetweenNowrap pwd__loginBtnBox">
             <a href="{{ url('./auth/login') }}" class="pwd__btn link btn__auth btn--gray">返回注册登录</a>
@@ -61,12 +61,12 @@
               @endforeach
             </ul>
           @endif
-          <p class="u-pt35">
+          <p class="u-pt35" data-error>
             <input type="email" name="email" class="input u-sizeFullWidth" value="{{ old('email') }}" placeholder="输入邮箱">
           </p>
           <p class="u-pt40 u-flexBetweenNowrap">
             <a href="{{ url('./auth/login') }}" class="pwd__btn link btn__auth btn--gray">返回注册登录</a>
-            <button type="button" type="submit" class="pwd__btn btn__auth">下一步</button>
+            <button type="button" type="submit" class="pwd__btn btn__auth pwd__btn--next">下一步</button>
           </p>
       </form>
       </div>

@@ -1,4 +1,4 @@
-import {buildBasePath,isMobile} from './../utils'
+import {buildBasePath,isMobile,isEmail} from './../utils'
 import {formPopError,countdown,postSmsCode} from './helper'
 
 var state = {
@@ -9,9 +9,6 @@ var state = {
   },
   mobilePwd:{
     step: 1,
-  },
-  email:{
-    steps: 1,
   },
   thisType: "mobile"
 }
@@ -83,7 +80,22 @@ export default class Password {
         formPopError(data.msg)
       }
     }
+
+    // 密码找回
+    this.postFindEmail = () => $.post(buildBasePath('/password/email'),$('.pwd__email form').serialize())
+
+    this.postFindEmailHandle = data => {
+      if(data.status_code == 200){
+        formPopError()
+        location.href = buildBasePath('/password/send-email-success')
+      }else{
+        formPopError({
+          email: data.msg
+        })
+      }
+    }
   }
+
   init () {
     $('.pwd__title').click(e => {
       if($(e.target).hasClass('pwd__mobileTitle')){
@@ -114,6 +126,17 @@ export default class Password {
 
     $("#mobilePwd .pwd__btn").click(e => {
       this.resetByMObile().done(this.resetByMObileHandle)
+    })
+
+    // 邮箱找回密码事件
+    $(".pwd__email .pwd__btn--next").click(e => {
+      if(isEmail($(".pwd__email [name='email']").val())){
+        this.postFindEmail().done(this.postFindEmailHandle)
+      }else{
+        formPopError({
+          email: "邮箱格式错误"
+        })
+      }
     })
   }
 }

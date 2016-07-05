@@ -50,6 +50,9 @@ Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
     Route::get('email', 'PasswordController@getEmail');
     Route::post('email', 'PasswordController@postEmail');
 
+    // 重置密码发送成功
+    Route::get('send-email-success', 'PasswordController@getSendEmailSuccess');
+
     // 密码重置的路由...
     Route::get('reset/{token}', 'PasswordController@getReset');
     Route::post('reset', 'PasswordController@postResetByEmail');

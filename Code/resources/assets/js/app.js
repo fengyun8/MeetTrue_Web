@@ -1,16 +1,11 @@
 import $ from 'jquery'
-import Password from './auth/password'
-import Login from './auth/login'
-import Register from './auth/register'
-import ResetSuccess from './auth/resetSuccess'
+import Auth from './auth/auth'
 
-window.$ = $;
+window.$ = $
 
-var moduleMap = {};
-moduleMap.password = new Password();
-moduleMap.login = new Login();
-moduleMap.register = new Register();
-moduleMap.resetSuccess = new ResetSuccess();
+var moduleMap = {}
+
+new Auth(moduleMap)
 
 /**
  * 模块启动方法
@@ -21,8 +16,8 @@ moduleMap.resetSuccess = new ResetSuccess();
  * 页面加载完成后会获取body标签里data-module里的数据逐个执行相应模块的init方法。
  */
 $(function () {
-  var moduleNameList = $('body').data('module').split(' ');
+  var moduleNameList = $('body').data('module').split(' ')
   moduleNameList.forEach(function(moduleName){
-    !!moduleMap[moduleName] && moduleMap[moduleName].init();
+    !!moduleMap[moduleName] && moduleMap[moduleName].init()
   })
 })

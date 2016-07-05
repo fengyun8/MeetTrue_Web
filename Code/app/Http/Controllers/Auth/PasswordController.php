@@ -154,4 +154,9 @@ class PasswordController extends Controller
             );
         }
     }
+
+    public function getSendEmailSuccess()
+    {
+        return view('auth/sendEmailSuccess');
+    }
 }
