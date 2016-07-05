@@ -303,6 +303,18 @@
                         1. 此时邮件发送到日志里, 需要到日志里查看
                 pre / prd: sendcloud
 
+    14. Validate
+        API / AJAX：
+            1. use ValidateTrait;
+            2. 使用
+                // Check Email
+                $this->validateForApi($request, [
+                    'email' => 'required|email',
+                ]);
+                说明:
+                    1)、验证失败时, 其会抛出自定义的Validate Exception
+                    2)、Handler里 会进行处理，返回特定的格式
+
 
 
 

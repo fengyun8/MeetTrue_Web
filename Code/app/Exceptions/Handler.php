@@ -2,15 +2,20 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\SelfExceptions\ValidatorApiException;
+use App\Utils\ReturnTrait;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
+use App\Enums\StatusCodeEnum;
 
 class Handler extends ExceptionHandler
 {
+    use ReturnTrait;
+
     /**
      * A list of the exception types that should not be reported.
      *
@@ -45,6 +50,10 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
+        }
+        // 自定义 valdiator exception
+        if ($e instanceof ValidatorApiException) {
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, $e->errorMessage);
         }
         // 人性化提示错误(debug模式显示错误)
         if (config('app.debug') != true && !($e instanceof HttpException)) {
