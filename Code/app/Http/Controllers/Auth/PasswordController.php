@@ -7,6 +7,7 @@ use App\Enums\StatusCodeEnum;
 use App\Events\ResetPasswordEvent;
 use App\Http\Controllers\Controller;
 use App\Utils\LogUtil;
+use App\Utils\ValidateTrait;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -30,7 +31,7 @@ class PasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+    use ResetsPasswords, ValidateTrait;
 
     // 邮件找回密码 Subject
     protected $subject = '觅处｜Meet－True密码取回 ';
@@ -56,7 +57,7 @@ class PasswordController extends Controller
     public function postEmail(Request $request)
     {
         // Check Email
-        $this->validate($request, ['email' => 'required|email']);
+        $this->validateForApi($request, ['email' => 'required|email']);
 
         try {
             // Send Email
@@ -86,7 +87,7 @@ class PasswordController extends Controller
      */
     public function postResetByEmail(Request $request)
     {
-        $this->validate($request, [
+        $this->validateForApi($request, [
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|confirmed|min:6',
