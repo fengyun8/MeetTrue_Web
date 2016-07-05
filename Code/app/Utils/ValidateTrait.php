@@ -1,6 +1,7 @@
 <?php
 namespace App\Utils;
 
+use App\Exceptions\SelfExceptions\ValidatorApiException;
 use Illuminate\Http\Request;
 use Validator;
 
