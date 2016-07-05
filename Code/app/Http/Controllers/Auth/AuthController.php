@@ -90,20 +90,6 @@ class AuthController extends Controller
     }
 
     /**
-     * 忘记密码
-     */
-    public function getPassword()
-    {
-        return view('auth/password');
-    }
-
-
-    public function getResetSuccess()
-    {
-        return view('auth/resetSuccess');
-    }
-
-    /**
      * 刚注册的nickname给一个mt_随机整数
      * @return String  [eg: mt_0845297613]
      */

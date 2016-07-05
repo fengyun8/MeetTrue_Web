@@ -75,7 +75,7 @@ export default class Password {
     this.resetByMObileHandle = data => {
       if(data.status_code == 200){
         formPopError()
-        location.href = buildBasePath('/auth/reset-success')
+        location.href = buildBasePath('/password/reset-success')
       }else{
         formPopError(data.msg)
       }
@@ -94,9 +94,17 @@ export default class Password {
         })
       }
     }
+
+    // 短信回调
+    this.postSmsCodeHandle = data => {
+      formPopError({
+        verifyCode: data.msg
+      })
+    }
   }
 
   init () {
+    // 找回密码方式切换
     $('.pwd__title').click(e => {
       if($(e.target).hasClass('pwd__mobileTitle')){
         this.switchModule('mobile')
@@ -105,25 +113,33 @@ export default class Password {
       }
     })
 
+    // 手机找回密码，步骤控制
     $('#mobile .pwd__btn').click(e => {
       if($(e.target).hasClass('pwd__btn--next')){
+        // 下一步
         this.checkVrCode().done(this.checkVrCodeHandle)
       }else if($(e.target).hasClass('pwd__btn--pre')){
+        // 上一步
         this.stepPre()
       }else if($(e.target).hasClass('pwd__checkMobileVrCode')){
+
         this.checkMobileVrCode().done(this.checkMobileVrCodeHandle)
       }
     })
 
+    // 更换图片验证码
     $(".pwd__verifyCode").click(e => {
       $(e.target).attr('src',buildBasePath('/pic/create-code') + "?" + Math.random())
     })
 
+    // 发送短信验证码
     $(".pwd__mobileVrCode").click(e => {
-      countdown(10,e.target)
+      countdown(60,e.target)
       postSmsCode($('[name="mobile"]').val())
+        .done(this.postSmsCodeHandle)
     })
 
+    // 手机重置密码确定
     $("#mobilePwd .pwd__btn").click(e => {
       this.resetByMObile().done(this.resetByMObileHandle)
     })

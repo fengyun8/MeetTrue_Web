@@ -159,4 +159,9 @@ class PasswordController extends Controller
     {
         return view('auth/sendEmailSuccess');
     }
+
+    public function getResetSuccess()
+    {
+        return view('auth/resetSuccess');
+    }
 }

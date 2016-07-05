@@ -25,7 +25,7 @@ export default class ResetByEmail{
     this.resetPwdByEmailHandle = data => {
       if(data.status_code == 200){
         formPopError()
-        location.href = buildBasePath('/auth/reset-success')
+        location.href = buildBasePath('/password/reset-success')
       }else{
         formPopError(data.msg)
       }

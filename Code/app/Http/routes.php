@@ -22,9 +22,6 @@ Route::post('verify/phone-unique', 'Utils\ValidateController@phoneUnique');
 Route::get('pic/create-code', 'Utils\ValidateController@createPicCode');
 Route::post('pic/verify-code', 'Utils\ValidateController@verifyPicCode');
 
-// 忘记密码
-Route::get('auth/password', 'Auth\AuthController@getPassword');
-Route::get('auth/reset-success', 'Auth\AuthController@getResetSuccess');
 
 // Api 部分
 Route::post('api', 'APIController@gateway');
@@ -59,4 +56,7 @@ Route::group(['prefix' => 'password', 'namespace' => 'Auth'], function () {
 
     //手机重置密码
     Route::post('reset-by-phone', 'PasswordController@postResetByPhone');
+
+    // 重置密码成功
+    Route::get('reset-success', 'PasswordController@getResetSuccess');
 });

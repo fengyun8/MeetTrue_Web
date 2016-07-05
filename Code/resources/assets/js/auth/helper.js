@@ -13,13 +13,10 @@ export function countdown(seconds, display) {
 }
 
 export function postSmsCode(mobile) {
-  $.ajax({
+  return $.ajax({
     type: 'POST',
     url: '/sms/send-code',
-    data: { mobile: mobile },
-    success: function (response) {
-      return response
-    }
+    data: { mobile: mobile }
   })
 }
 
