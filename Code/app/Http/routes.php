@@ -68,3 +68,4 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('bind-mail/{token}', 'AuthController@getBindMailByToken');
 });
 
+Route::get('/profile', 'UsersController@show');
