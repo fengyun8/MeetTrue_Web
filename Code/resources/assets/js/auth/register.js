@@ -9,7 +9,7 @@ export default class Register {
         countdown(10, e.target)
       }
       var mobile = $('#mobile').val().trim()
-      if (mobile.length) {
+      if (mobile.length && !mobileField.hasClass('form__error')) {
         postSmsCode(mobile)
       }
     })
