@@ -191,25 +191,22 @@ class AuthController extends Controller
 
         // Check params
         if (empty($params)) {
-            // TODO token出错时，应该跳转页面
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['token' => trans('auth.bindMail.token')]);
+            return view('emails/bindMailFailed', ['errorMsg' => trans('auth.bindMail.token')]);
         }
         if (!Arr::has($params, 'email') || !Arr::has($params, 'user_id')) {
-            // TODO token出错时，应该跳转页面
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['token' => trans('auth.bindMail.token')]);
+            return view('emails/bindMailFailed', ['errorMsg' => trans('auth.bindMail.token')]);
         }
 
         // Update user
         if (!\App\User::updateByUserId($params['user_id'], ['email' => $params['email']])) {
             // update fail
             LogUtil::error('bindMailByToken:用户邮箱更新失败', $params);
-            // TODO token出错时，应该跳转页面
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['other' => '更新失败']);
+            return view('emails/bindMailFailed', ['errorMsg' => '更新失败']);
         }
 
         // Delete token
         \Cache::forget(CacheKeyPrefixEnum::BIND_MAIL . $token);
 
-        return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
+        return view('emails/bindMailSuccess');
     }
 }
