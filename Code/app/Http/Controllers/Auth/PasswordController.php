@@ -66,7 +66,7 @@ class PasswordController extends Controller
             });
         } catch (Exception $e) {
             LogUtil::error("重置密码邮件失败: " . $e->getMessage(), ['error' => $e]);
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '邮件发送失败,工程师正在紧急恢复中,敬请谅解!');
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['email' => '邮件发送失败,工程师正在紧急恢复中,敬请谅解!']);
         }
 
         // Handle Result
@@ -75,7 +75,7 @@ class PasswordController extends Controller
                 return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
 
             case Password::INVALID_USER:
-                return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans($response));
+                return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['email' => trans($response)]);
         }
     }
 
@@ -117,6 +117,7 @@ class PasswordController extends Controller
                 return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
 
             default:
+                // TODO token出错时，应该跳转页面
                 return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['email' => trans($response)]);
         }
     }

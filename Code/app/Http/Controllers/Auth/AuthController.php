@@ -143,6 +143,8 @@ class AuthController extends Controller
 
     /**
      * 绑定邮箱
+     * Error - key:
+     *      email
      */
     public function postBindMail(Request $request)
     {
@@ -155,7 +157,7 @@ class AuthController extends Controller
         ]);
         // Exists Email
         if (\App\User::where('email', '=', $email)->exists()) {
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans('auth.exists.email'));
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['email' => trans('auth.exists.email')]);
         }
 
         // 生成 token
@@ -178,6 +180,9 @@ class AuthController extends Controller
 
     /**
      * 绑定邮箱链接验证
+     * Error - key:
+     *      token
+     *      other
      */
     public function getBindMailByToken($token)
     {
@@ -186,17 +191,20 @@ class AuthController extends Controller
 
         // Check params
         if (empty($params)) {
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans('auth.bindMail.token'));
+            // TODO token出错时，应该跳转页面
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['token' => trans('auth.bindMail.token')]);
         }
         if (!Arr::has($params, 'email') || !Arr::has($params, 'user_id')) {
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, trans('auth.bindMail.token'));
+            // TODO token出错时，应该跳转页面
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['token' => trans('auth.bindMail.token')]);
         }
 
         // Update user
         if (!\App\User::updateByUserId($params['user_id'], ['email' => $params['email']])) {
             // update fail
             LogUtil::error('bindMailByToken:用户邮箱更新失败', $params);
-            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, '更新失败');
+            // TODO token出错时，应该跳转页面
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, ['other' => '更新失败']);
         }
 
         // Delete token
