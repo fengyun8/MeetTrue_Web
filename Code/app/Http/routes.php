@@ -71,3 +71,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 });
 
 Route::get('/profile', 'UsersController@show');
+
+Route::group(['prefix' => 'users'], function () {
+  Route::post('password/verify-current', 'UsersController@postVerifyCurrentPassword');
+});
