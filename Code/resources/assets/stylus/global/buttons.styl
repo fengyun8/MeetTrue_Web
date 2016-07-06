@@ -52,7 +52,38 @@
   
 .btn__select
   btn-clean()
-  border 1px solid #000
+  border 1px solid #ccc
+  border-radius 2px
+  font-size 14px
+  color gray-a7
+  padding 0.5em 0.7em
+  position relative
+  input,
+  button
+    btn-clean()
+    &:focus~ul
+      display block
+  button
+    dropDown()
+  ul
+    position absolute
+    top 100%
+    left 0
+    width 100%
+    border-radius 0 0 2px 2px
+    box-shadow 0 2px 2px rgba(0,0,0,.3)
+    display none
+  li
+    padding 0.5em 0.3em
+    border 1px solid #ccc
+    &:not(:last-child)
+      border-bottom none
+    &:last-child
+      border-radius 0 0 2px 2px
+
+.btn__dropDown
+  btn-clean()
+  dropDown()
 
 .btn--text
   border none
