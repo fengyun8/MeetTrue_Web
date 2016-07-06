@@ -15,6 +15,10 @@
                     </a>
                 </div>
                 <div class="nav__rightPart u-floatRight">
+                    <span class="btn__search mtSearch">
+                        <svg class="svg svg--search u-vam"><use xlink:href="#search" /></svg>
+                        <input type="text" class="input__noStyle mtSearch__input" placeholder="Search Meet-True">
+                    </span>
                     @yield('right-nav')
                 </div>
             </div>
@@ -25,20 +29,6 @@
                 @yield('content')
             </div>
         </div>
-        <div class="nav__rightPart u-floatRight">
-          <span class="btn__search mtSearch">
-            <svg class="svg svg--search u-vam"><use xlink:href="#search" /></svg>
-            <input type="text" class="input__noStyle mtSearch__input" placeholder="Search Meet-True">
-          </span>
-          @yield('right-nav')
-        </div>
-      </div>
-    </nav>
-    <div class="content" id="app">
-      <div class="surface">
-        @yield('content')
-      </div>
-    </div>
     <script src="{{ asset('js/app.js')}}"></script>
   </body>
 </html>
