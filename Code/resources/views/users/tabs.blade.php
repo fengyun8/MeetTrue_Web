@@ -1,4 +1,4 @@
-<ul class="streamTabs">
+<ul class="streamTabs streamTabs--profile">
   <li class="streamTab-item">
     <a class="link link--white" href="#">作品</a>
   </li>

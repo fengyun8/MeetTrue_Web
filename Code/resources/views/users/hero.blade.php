@@ -1,10 +1,10 @@
-<figure class="hero">
+<figure class="hero u-sizeFullViewHeight">
   <img class="hero-cover" src="{{ asset('images/hero-cover.jpg') }}" alt="">
-  <header class="hero-profile u-clearfix">
-    <div class="hero-avatar u-floatLeft">
+  <header class="hero-profile u-flexBetweenNowrap">
+    <div class="hero-avatar">
       <img class="avatar avatar--square avatar--110x110" src="{{ asset('images/avatar.jpg') }}" alt="Avatar">
     </div>
-    <div class="u-floatRight">
+    <div class="hero-meta">
       <h1 class="hero-title">程犁天</h1>
       <p class="hero-focus">
         <span class="hero-college">中国美术学院</span>
