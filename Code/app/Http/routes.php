@@ -76,6 +76,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 });
 
 Route::get('/profile/{userId}', 'UsersController@show');
+Route::post('/profile', 'UsersController@edit');
 
 Route::group(['prefix' => 'users'], function () {
   Route::get('{slug}/profile', 'UsersController@getProfile');

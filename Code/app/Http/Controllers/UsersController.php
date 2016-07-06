@@ -20,6 +20,8 @@ class UsersController extends Controller
      */
     public function __construct()
     {
+        // TODO 模拟登陆
+        Auth::loginUsingId(1);
         $this->middleware('auth', ['except' => ['show']]);
     }
 
@@ -61,6 +63,31 @@ class UsersController extends Controller
 //        dd("----");
 
         return view('users.show')->with(compact('user'));
+    }
+
+    public function edit(Request $request)
+    {
+        // Get Params
+        $nickName = $request->input('nickname', null);
+        $majorId = $request->input('major', null);
+        $schoolId = $request->input('school', null);
+        $provinceId = $request->input('province', null);
+        $cityId = $request->input('city', null);
+        $gender = $request->input('gender', null);
+        $signature = $request->input('signature', null);
+
+        // Get user
+        $user = Auth::user();
+        empty($nickName) ?: $user->nickname = $nickName;
+        empty($majorId) ?: $user->major_id = $majorId;
+        empty($schoolId) ?: $user->school_id = $schoolId;
+        empty($provinceId) ?: $user->province_id = $provinceId;
+        empty($cityId) ?: $user->city_id = $cityId;
+        !isset($gender) ?: $user->gender = $gender;
+        empty($signature) ?: $user->signature = $signature;
+        $user->save();
+
+        return $this->jsonReturn(StatusCodeEnum::SUCCESS_CODE);
     }
 
     /**
