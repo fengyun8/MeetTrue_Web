@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\CacheKeyPrefixEnum;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -37,10 +38,67 @@ class User extends Model implements AuthenticatableContract,
 
 
     /************************************ Arrtribute 部分 *************************************/
-    public function getNameAttribute()
+    public function getANameAttribute()
     {
         // 合并名字
-            return $this->last_name . $this->first_name;
+        return $this->last_name . $this->first_name;
+    }
+
+    /**
+     * 获取手机
+     * aMobile
+     */
+    public function getAMobileAttribute()
+    {
+        // 手机不可见
+        if ($this->mobile_visiable == 0) {
+            // 登陆且是自己
+            if (!empty(auth()->user()) && auth()->user()->id == $this->id) {
+                return $this->mobile;
+            }
+            return '';
+        }
+
+        return $this->mobile;
+    }
+
+    /**
+     * 获取邮箱
+     * aEmail
+     */
+    public function getAEmailAttribute()
+    {
+        // 邮箱不可见
+        if ($this->email_visiable == 0) {
+            // 登陆且是自己
+            if (!empty(auth()->user()) && auth()->user()->id == $this->id) {
+                return $this->email;
+            }
+            return '';
+        }
+
+        return $this->email;
+    }
+
+    /**
+     * 这里只给需判断绑定邮箱的地方用
+     * 值说明:
+     *      null: email为空
+     *      true: email待验证
+     *      email: 存在email
+     */
+    public function getBindEmailAttribute()
+    {
+        if (empty($this->email)) {
+            $isBindEmail = \Cache::get(CacheKeyPrefixEnum::IS_BIND_MAIL . $this->id);
+            if (empty($isBindEmail)) {
+                return null;
+            }
+
+            return true;
+        }
+
+        return $this->email;
     }
 
     /************************ Service 部分 ************************/

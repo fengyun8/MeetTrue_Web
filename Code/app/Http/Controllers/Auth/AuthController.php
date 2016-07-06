@@ -168,6 +168,8 @@ class AuthController extends Controller
             'email' => $email,
             'user_id' => \Auth::user()->id
         ], 24*60);
+        // 用来判断用户是否有邮箱在验证
+        \Cache::put(CacheKeyPrefixEnum::IS_BIND_MAIL . \Auth::user()->id,1,24*60);
 
         // 发送邮件（队列）
         \Mail::send('emails.bindMail', compact('token'), function ($message) use ($email) {
@@ -206,6 +208,7 @@ class AuthController extends Controller
 
         // Delete token
         \Cache::forget(CacheKeyPrefixEnum::BIND_MAIL . $token);
+        \Cache::forget(CacheKeyPrefixEnum::IS_BIND_MAIL . Arr::get($params, 'user_id'));
 
         return view('emails/bindMailSuccess');
     }
