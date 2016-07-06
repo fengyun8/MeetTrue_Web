@@ -70,7 +70,7 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('bind-mail/{token}', 'AuthController@getBindMailByToken');
 });
 
-Route::get('/profile', 'UsersController@show');
+Route::get('/profile/{userId}', 'UsersController@show');
 
 Route::group(['prefix' => 'users'], function () {
   Route::get('{slug}/profile', 'UsersController@getProfile');

@@ -10,6 +10,7 @@ use Auth;
 use App\Enums\StatusCodeEnum;
 use Hash;
 use Validator;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -28,9 +29,38 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($userId)
     {
-        return view('users.show');
+        // Get user
+        $user = User::findOrFail($userId);
+        /**
+         * 资料:
+         *      avatar: aAvatar
+         *      name:   aNickname
+         *      major:  aMajor
+         *      school:  aSchool
+         *      province:  aProvince
+         *      city:  aCity
+         *      gender: aGender
+         *      signature:  aSignature
+         *      mobile: aMobile
+         *      email:  aEmail
+         */
+//        echo \ImageStrategy::process(auth()->user()->aAvatar, 'avatar');
+//        die;
+//        echo auth()->user()->aAvatar . "<br />";
+//        echo auth()->user()->aNickname . "<br />";
+//        echo auth()->user()->aMajor . "<br />";
+//        echo auth()->user()->aSchool . "<br />";
+//        echo auth()->user()->aProvince . "<br />";
+//        echo auth()->user()->aCity . "<br />";
+//        echo auth()->user()->aGender . "<br />";
+//        echo auth()->user()->aSignature . "<br />";
+//        echo auth()->user()->aMobile . "<br />";
+//        echo auth()->user()->aEmail . "<br />";
+//        dd("----");
+
+        return view('users.show')->with(compact('user'));
     }
 
     /**

@@ -28,9 +28,9 @@ return [
 ////                    ->setImgWatermark('default/watermark.png')
 ////                    ->setImgWatermarkPercentSizeBaseMainImg(10)->setImgWatermarkLocation(10, 50);
 //            },
-//            'avatar' => function (ImageBuilder $builder) {
-//                return $builder->setWidth(150)->setQuality(80);
-//            },
+            'avatar' => function (ImageBuilder $builder) {
+                return $builder->setWidth(150)->setQuality(80);
+            },
 //            'listGallery' => function (ImageBuilder $builder) {
 //                return $builder->setWidth(150)->setQuality(80);
 //            }
