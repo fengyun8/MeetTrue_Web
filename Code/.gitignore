@@ -9,3 +9,4 @@ Homestead.json
 *.log
 public/css
 public/js
+public/upload

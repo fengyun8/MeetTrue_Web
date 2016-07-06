@@ -25,8 +25,13 @@ Route::post('pic/verify-code', 'Utils\ValidateController@verifyPicCode');
 
 // Api 部分
 Route::post('api', 'APIController@gateway');
-//文件上传接口
-Route::controller('file', 'File\FileController');
+
+// File Route
+Route::group(['prefix' => 'file', 'namespace' => 'File'], function () {
+    Route::post('upload-picture', 'FileController@uploadPicture');
+    Route::post('upload-avatar', 'FileController@uploadAvatar');
+    Route::post('upload-user-banner', 'FileController@uploadUserBanner');
+});
 
 //后台 admin
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
