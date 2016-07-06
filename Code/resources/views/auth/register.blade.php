@@ -2,9 +2,6 @@
 @section('title', '注册')
 @section('body-class', 'register')
 @section('module', 'register')
-@section('right-nav')
-    <a href="/auth/login" class="u-fontSizeSmaller link link--dark" >登录</a>
-@endsection
 @section('content')
     @include('auth.figure')
     <div class="u-sizeHalfWidth u-floatRight">

@@ -2,10 +2,6 @@
 @section('title', '找回密码')
 @section('body-class', 'password')
 @section('module','password')
-@section('right-nav')
-  <a href="/auth/login" class="u-fontSizeSmaller link link--dark" >登录</a>
-  <a href="/auth/register" class="u-fontSizeSmaller link link--dark" >注册</a>
-@endsection
 @section('content')
   <div class="pwd pwd--mobile">
     <p class="u-tac">
