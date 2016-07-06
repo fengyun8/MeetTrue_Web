@@ -3,15 +3,63 @@
   width 100%
   line-height 65px
   box-shadow 0 2px 4px rgba(0, 0, 0, .1)
-  @media screen and (max-width: medium-screen)
+  box-sizing border-box
+  padding 0 2em
+  @media screen and (max-width: max-screen)
     padding 0 10px
+  // @media screen and (max-width: medium-screen)
 
 .nav__content
   margin 0 auto
   padding 2px 0
-  max-width max-screen
+  // max-width max-screen
 
 .nav--fixed
   z-index 100
-  box-shadow none
   position fixed
+
+.nav__logo--white
+  display none
+
+.nav__headerImg
+  bgi-center()
+  display inline-block
+  width 50px
+  height 50px
+  vertical-align middle
+  border-radius 2px
+  box-shadow 1px 1px 1px rgba(0,0,0,.3)
+
+.nav__menu
+  margin-left 8.3%
+  .link
+    padding 0 10px
+    &:not(:last-child)
+      position relative
+      &:after
+        position absolute
+        right -5px
+        content "|"
+
+.nav__rightPart
+  .link
+    display inline-block
+    margin 0 5px
+    &:not(:last-child)
+      position relative
+      &:after
+        position absolute
+        right -8px
+        top 0
+        content "|"
+
+.nav--white
+  linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,0),rgba(0,0,0,.15))
+  box-shadow none
+  color #fff
+  .nav__logo--colour
+    display none
+  .nav__logo--white
+    display inline-block
+  .link
+    text-shadow 1px 1px 1px rgba(0,0,0,.3)

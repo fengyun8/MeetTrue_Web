@@ -85,7 +85,7 @@ export default class Password {
       }
     }
 
-    // 密码找回
+    // 邮箱密码找回
     this.postFindEmail = () => $.post(buildBasePath('/password/email'),$('.pwd__email form').serialize())
 
     this.postFindEmailHandle = data => {
