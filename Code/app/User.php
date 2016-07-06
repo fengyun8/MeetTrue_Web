@@ -3,6 +3,8 @@
 namespace App;
 
 use App\Enums\CacheKeyPrefixEnum;
+use App\Enums\DataDictEnum;
+use App\Services\UploadService;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -42,6 +44,54 @@ class User extends Model implements AuthenticatableContract,
     {
         // 合并名字
         return $this->last_name . $this->first_name;
+    }
+
+    public function getAAvatarAttribute()
+    {
+        $default_avatar = asset('images/avatar.jpg');
+
+        // Parse src
+        $src = UploadService::parse($this->avatar, $default_avatar);
+        return $src;
+    }
+
+    public function getABannerAttribute()
+    {
+        $default_avatar = asset('images/hero-cover.jpg');
+
+        // Parse src
+        $src = UploadService::parse($this->banner, $default_avatar);
+        return $src;
+    }
+
+    public function getANicknameAttribute()
+    {
+        return $this->nickname;
+    }
+
+    public function getAMajorAttribute()
+    {
+        return DataDict::getValue(DataDictEnum::MAJOR, $this->major_id);
+    }
+
+    public function getASchoolAttribute()
+    {
+        return DataSchool::getNameByCode($this->school_id);
+    }
+
+    public function getAProvinceAttribute()
+    {
+        return $this->province_id;
+    }
+
+    public function getACityAttribute()
+    {
+        return $this->city_id;
+    }
+
+    public function getAGenderAttribute()
+    {
+        return DataDict::getValue(DataDictEnum::GENDER, $this->gender);
     }
 
     /**

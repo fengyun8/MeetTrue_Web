@@ -103,7 +103,7 @@
     邮箱
   </div>
   <div class="col form-contents u-size9of12">
-    <a href="#">立即绑定</a>
+    <a class="link link--orange" href="#">立即绑定</a>
     <div class="form-hint"></div>
   </div>
 </div>
@@ -112,7 +112,7 @@
     密码
   </div>
   <div class="col form-contents u-size9of12">
-    <a href="#">修改密码</a>
+    <a class="link link--orange" href="#">修改密码</a>
     <div class="form-hint"></div>
   </div>
 </div>
@@ -121,7 +121,7 @@
     微信
   </div>
   <div class="col form-contents u-size9of12">
-    <a href="#">立即绑定</a>
+    <a class="link link--orange" href="#">立即绑定</a>
     <div class="form-hint"></div>
   </div>
 </div>
