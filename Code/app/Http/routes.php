@@ -73,5 +73,11 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::get('/profile', 'UsersController@show');
 
 Route::group(['prefix' => 'users'], function () {
-  Route::post('password/verify-current', 'UsersController@postVerifyCurrentPassword');
+  Route::get('{slug}/profile', 'UsersController@getProfile');
+  Route::post('{slug}/profile', 'UsersController@postProfile');
 });
+
+// 用户修改密码：1. 验证当前密码 2.更新密码
+Route::post('password/current', 'UsersController@postVerifyCurrentPassword');
+Route::post('password/update', 'UsersController@postUpdatePassword');
+

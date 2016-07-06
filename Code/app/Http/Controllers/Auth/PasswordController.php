@@ -43,7 +43,7 @@ class PasswordController extends Controller
      */
     public function __construct()
     {
-       // $this->middleware('guest', ['except' => 'postResetByPhone']);
+       $this->middleware('guest');
     }
 
     /**
