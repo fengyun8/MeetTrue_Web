@@ -27,6 +27,12 @@ export default class btnSelect {
       </ul>
     </span>
  *
+ * 简写 在实例化的时候会补全，不过这样是没有初始数据的
+    <span class="btn__select">
+      <input type="text" placeholder="专业">
+      <input type="hidden" name="qwe">
+    </span>
+ * 
  * 导入数据
     window.btnSelectList.qwe.set({
       caa: "中国美术学院",
@@ -45,21 +51,27 @@ class btnSelectClass {
     this.preText = ""
     this.set = data => {
       this.data = data
-      this.buildDom(data)
+      this.reBuildDom(data)
     }
     this.get = () => this.btn__select.children("input[type='hidden']").val()
   }
 
   init () {
     var _this = this
-    this.data == null && this.buildData()
+    this.data == null && this.buildBtnSelect()
+    // 选择 取值
     this.btn__select.on("click","li",function(){
       _this.setValue($(this).attr("name"), $(this).text())
     })
+    // 监听输入动作，触发搜索功能
     this.btn__select.children("input[type='text']").keyup(e => {
       var val = $(e.target).val()
       val !== this.preText && this.search(val)
     })
+    // 
+    // this.btn__select.children("input[type='text'],button").keydown(e => {
+    //   ;
+    // })
   }
 
   setValue (name, value) {
@@ -67,16 +79,24 @@ class btnSelectClass {
     this.btn__select.children("input[type='hidden']").val(name)
   }
 
-  buildData () {
-    var data = {}
-    var items = this.btn__select.find("li")
-    items.each(function(){
-      data[$(this).attr("name")] = $(this).text()
-    })
-    this.data = data
+  buildBtnSelect () {
+    var ul = this.btn__select.children("ul")
+    var button = this.btn__select.children("button")
+    button.length == 0 && this.btn__select.children("input[type='hidden']").after('<button type="button"></button>')
+    if(ul.length == 0){
+      this.btn__select.append("<ul></ul>")
+      this.data = {}
+    }else{
+      var data = {}
+      var items = this.btn__select.find("li")
+      items.each(function(){
+        data[$(this).attr("name")] = $(this).text()
+      })
+      this.data = data
+    }
   }
 
-  buildDom (data) {
+  reBuildDom (data) {
     var ul = this.btn__select.children("ul")
     ul.empty()
     var items = ""
@@ -93,9 +113,9 @@ class btnSelectClass {
       $.each(this.data,(k, v) => {
         (v.indexOf(val) > -1) && (data[k] = v)
       })
-      this.buildDom(data)
+      this.reBuildDom(data)
     }else{
-      this.buildDom(this.data)
+      this.reBuildDom(this.data)
     }
   }
 

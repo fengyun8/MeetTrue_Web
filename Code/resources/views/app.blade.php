@@ -5,22 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
   </head>
-  <body class="@yield('body-class')" data-module="search @yield('module')">
+  <body class="@yield('body-class')" data-module="search btnSelect @yield('module')">
     @include('svg.all')
     @include('shared.nav')
     @yield('below-nav')
     <div class="content" id="app">
       <div class="surface">
         @yield('content')
-<!--         <span class="btn__select">
-          <input type="text" value="123" placeholder="专业">
-          <button type="button"></button>
-          <ul>
-            <li>123</li>
-            <li>456</li>
-            <li>789</li>
-          </ul>
-        </span> -->
+        <span class="btn__select">
+          <input type="text" placeholder="专业">
+          <input type="hidden" name="qwe">
+        </span>
       </div>
     </div>
     @include('shared.footer')
