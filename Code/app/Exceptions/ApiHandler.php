@@ -9,6 +9,8 @@ use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use App\Exceptions\SelfExceptions\ValidatorApiException;
+use App\Enums\StatusCodeEnum;
 
 class ApiHandler extends ExceptionHandler
 {
@@ -23,6 +25,13 @@ class ApiHandler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        // 自定义 valdiator exception
+        if ($e instanceof ValidatorApiException) {
+             $errorArr = array_divide(array_dot($e->errorMessage))['1'];
+             
+            return $this->jsonReturn(StatusCodeEnum::ERROR_CODE, current($errorArr));
+        }
+
         $code = $e instanceof HttpExceptionInterface ? $e->getStatusCode() : 500;
         $message = $e->getMessage();
         $data = null;

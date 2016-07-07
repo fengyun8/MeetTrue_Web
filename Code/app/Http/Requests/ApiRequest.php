@@ -15,6 +15,8 @@ class ApiRequest extends Request
 {
     private $data;
 
+    protected $injected_parameters = [];
+
     public function __construct(Request $request)
     {
         // get request data
@@ -31,6 +33,10 @@ class ApiRequest extends Request
      */
     public function input($key = null, $default = null)
     {
+        // if(!empty($this->injected_parameters)) {
+        //     $this->data += $this->injected_parameters;
+        // }
+
         return Arr::get($this->data, $key, $default);
     }
 
@@ -41,6 +47,31 @@ class ApiRequest extends Request
      */
     public function all()
     {
-        return $this->data;
+        if(!empty($this->injected_parameters)) {
+            $this->data += $this->injected_parameters;
+        }
+       return $this->data;
+    }
+
+    /**
+     * 将健值插入到ApiRequest的$injected_parameters属性中
+     * 如果值是数组，需要传一个参数，如$request->inject($data); 
+     * 会将$data数组的健值对应放进$injected_parameters属性中
+     * 如果是健值对，传两个参数，$key和$value
+     * 
+     * @param  String or Array $key  
+     * @param  mixed $value 
+     * @return ApiRequest Object
+     */
+    public function inject($key, $value = null)
+    {
+        if(is_array($key)) {
+            foreach($key as $k => $v) {
+                $this->inject($k, $v);
+            }
+        } else {
+            $this->injected_parameters[$key] = $value;
+        }
+        return $this;
     }
 }

@@ -51,7 +51,7 @@ class ApiController extends Controller
     {
         // need Auth接口
         $authentication = [
-            'auth.register'
+
         ];
         // app config
         $configClients = Config::get('app.clients');
@@ -64,14 +64,12 @@ class ApiController extends Controller
         $apiName = $request->input('api', '');
         $sign = $request->input('_sign');
 
-        // check sign and 本地环境不校验签名
-        if ( !Config::get('app.debug') ) {
-
-            // http expired error
-            $_timeDiff = (time() - $requestTimestamp);
-            if ( $_timeDiff < 0 || $_timeDiff > Arr::get($configClients, "$device.expired_time", 30)) {
-                throw new AccessDeniedHttpException(ApiExceptionEnum::SYSTEM_EXPIRED_ERROR);
-            }
+       // check sign and 本地环境不校验签名
+        if (! Config::get('app.debug') ) {
+            // 先时间不验证
+            // if ( $_timeDiff < 0 || $_timeDiff > Arr::get($configClients, "$device.expired_time", 30)) {
+            //     throw new AccessDeniedHttpException(ApiExceptionEnum::SYSTEM_EXPIRED_ERROR);
+            // }
             // device not exists
             if (!Arr::has($configClients, $device)) {
                 throw new AccessDeniedHttpException(ApiExceptionEnum::SYSTEM_DEVICE_NOT_EXIST);

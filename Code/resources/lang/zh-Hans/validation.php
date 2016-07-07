@@ -126,6 +126,7 @@ return [
         'avatar' => '头像',
         'mobile' => '手机号',
         'verifyCode' => '验证码',
+        'credential' => '账户'
     ],
 
 ];

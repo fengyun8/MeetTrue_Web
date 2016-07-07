@@ -137,7 +137,7 @@ class UsersController extends Controller
     /**
      * 用户修改密码之更新密码
      * @param  Request $request [description]
-     * @return [type]           [description]
+     * @return Response
      */
     public function postUpdatePassword(Request $request)
     {

@@ -215,10 +215,10 @@ return [
     ],
 
     'clients' => [
-        'ios' => [
+        'iOS' => [
             'app_key'    => 'eN3AQjZp2O2TUSnyQpJ1G9Ckzo9SQcqx',
             'app_secret' => 'oMB4VSS9vESlc5tNPwSzj1amGtsHAlNG',
-            'expired_time' => 30,
+            'expired_time' => 600,
         ]
     ],
 
