@@ -12,6 +12,15 @@
     <div class="content" id="app">
       <div class="surface">
         @yield('content')
+<!--         <span class="btn__select">
+          <input type="text" value="123" placeholder="专业">
+          <button type="button"></button>
+          <ul>
+            <li>123</li>
+            <li>456</li>
+            <li>789</li>
+          </ul>
+        </span> -->
       </div>
     </div>
     @include('shared.footer')
