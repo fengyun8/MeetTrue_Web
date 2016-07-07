@@ -1,4 +1,4 @@
-<footer class="u-sizeViewWidth100 u-marginTop50 u-tac u-pt15 u-pb30 u-borderTop u-TextColorGraya7">
+<footer class="u-marginTop50 u-tac u-pt15 u-pb30 u-borderTop u-TextColorGraya7">
   <p>
     ©2015觅处 
     <a href="#" class="link">关于</a>

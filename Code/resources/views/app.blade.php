@@ -12,10 +12,6 @@
     <div class="content" id="app">
       <div class="surface">
         @yield('content')
-        <span class="btn__select">
-          <input type="text" placeholder="专业">
-          <input type="hidden" name="qwe">
-        </span>
       </div>
     </div>
     @include('shared.footer')

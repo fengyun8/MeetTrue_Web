@@ -1,5 +1,4 @@
-<figure class="hero u-sizeFullViewHeight">
-  <img class="hero-cover" src="{{ ImageStrategy::process($user->aBanner, 'user_banner') }}" alt="">
+<figure class="hero u-sizeFullViewHeight" style="background-image: url('{{ ImageStrategy::process($user->aBanner, 'user_banner') }}')">
   <header class="hero-profile u-flexBetweenNowrap">
     <div class="hero-avatar">
       <img class="avatar avatar--square avatar--110x110" src="{{ ImageStrategy::process($user->aAvatar, 'avatar') }}" alt="Avatar">
