@@ -12,7 +12,10 @@
       昵称
     </div>
     <div class="col form-contents u-size9of12">
-      <div class="editable editorWithUnderline">mt_439204384</div>
+      <input class="form-input form-input--borderTransparent" value="mt_439204384"></input>
+      <span class="btn btn--edit btn--withSvg">
+        @include('svg.edit')
+      </span>
       <div class="form-hint"></div>
     </div>
   </div>
@@ -22,7 +25,11 @@
       <span class="form-asterisk">*</span>
     </div>
     <div class="col form-contents u-size9of12">
-      <img class="avatar avatar--square avatar--110x110" src="{{ ImageStrategy::process($user->aAvatar, 'avatar') }}" alt="Avatar">
+      <div class="avatar avatar--square avatar--110x110">
+        <img class="avatar-image" src="{{ ImageStrategy::process($user->aAvatar, 'avatar') }}" alt="Avatar">
+        <span class="avatar-overlay"></span>
+        @include('svg.edit')
+      </div>
       <div class="form-hint"></div>
     </div>
   </div>

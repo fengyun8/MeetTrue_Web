@@ -54,10 +54,13 @@
   btn-clean()
   border 1px solid #ccc
   border-radius 2px
+  margin-right 15px
   font-size 14px
   color gray-a7
   padding 0.5em 0.7em
   position relative
+  &:last-child
+    margin-left 15px
   input,
   button
     btn-clean()
@@ -122,7 +125,23 @@
 .btn--gray
   background-color gray-a7
   color #fff
-  
+
+//动画按钮
+.btn__logo--ani
+  width 65px
+  padding 0
+  &:before
+    content " "
+    display inline-block
+    width 100%
+    padding-bottom 77%
+    vertical-align middle
+    background-image url('/images/logoAnimations.png')
+    background-size cover
+  &:hover:before
+    animation logoAnimations .6s steps(13)
+  &:active:before
+    animation-play-state paused
 
 // input
 .input,
@@ -159,3 +178,8 @@
 .btn--large
   padding 20px 90px
   font-size 16px
+
+.btn--withSvg .svg--edit
+  fill gray-a7
+  margin-left 25px
+  margin-top -4px
