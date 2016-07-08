@@ -1,16 +1,19 @@
 // 下拉选择按钮 btnSelect
 export default class btnSelect {
-  constructor (){
+  constructor () {
     this.btnSelectClass = ".btn__select"
   }
   init () {
-    window.btnSelectList = {}
+    var btnSelectList = {}
     $(this.btnSelectClass).each(function(){
       var name = $(this).children('input[type="hidden"]').attr("name");
       var btnSelect = new btnSelectClass($(this))
-      window.btnSelectList[name] = btnSelect
+      btnSelectList[name] = btnSelect
       btnSelect.init()
     })
+    window.btnSelectList = btnSelectList
+    var btnSelectRelations = new btnSelectRelation(["province","city"])
+    btnSelectRelations.init()
   }
 }
 
@@ -49,6 +52,8 @@ class btnSelectClass {
     this.btn__select = element
     this.data = data
     this.preText = ""
+    this.name = undefined
+    this.btnSelectRelation = null
     this.set = data => {
       this.data = data
       this.reBuildDom(data)
@@ -62,21 +67,23 @@ class btnSelectClass {
     // 选择 取值
     this.btn__select.on("click","li",function(){
       _this.setValue($(this).attr("name"), $(this).text())
+      typeof _this.btnSelectRelation === "function" && _this.btnSelectRelation(_this.name,$(this).attr("name"))
     })
     // 监听输入动作，触发搜索功能
     this.btn__select.children("input[type='text']").keyup(e => {
       var val = $(e.target).val()
       val !== this.preText && this.search(val)
     })
-    // 
-    // this.btn__select.children("input[type='text'],button").keydown(e => {
-    //   ;
-    // })
+    this.setName()
   }
 
   setValue (name, value) {
     this.btn__select.children("input[type='text']").val(value)
     this.btn__select.children("input[type='hidden']").val(name)
+  }
+
+  setName () {
+    this.name = this.btn__select.children('input[type="hidden"]').attr("name")
   }
 
   buildBtnSelect () {
@@ -118,5 +125,78 @@ class btnSelectClass {
       this.reBuildDom(this.data)
     }
   }
+}
 
+/*["province","city"]*/
+/**
+ * btnSelect关联器
+ * 在btnSelect初始化之后 才能 将关联器调用初始化
+ *
+ * 在实例化关联器是传入与关联按钮的name数组，按关联顺序排序
+ * 如下：province的下一级是city
+ * 
+ * 关于初始化的板栗：
+    var btnSelectRelations = new btnSelectRelation(["province","city"])
+    btnSelectRelations.init()
+ *
+ * 设置数据:
+    window.btnSelectList.province.setSource({
+      zj: "浙江省",
+      hn: "湖南省",
+      sc: "四川省"
+    })
+
+    window.btnSelectList.city.setSource({
+      zj: {
+        hz:"杭州市",
+        sx:"绍兴市",
+        jh:"金华市"
+      },
+      hn: {
+        cs:"长沙市",
+        yy:"岳阳市",
+        cd:"常德市"
+      },
+      sc: {
+        cd:"成都市",
+        my:"绵阳市",
+        dy:"德阳市"
+      }
+    })
+ * 
+ */
+class btnSelectRelation {
+  constructor (relationType) {
+    this.relationType = relationType
+    this.relationData = []
+    this.set = (childName, data) => {
+      var index = this.getChildIndex(childName)
+      this.relationData[index] = data
+      index == 0 && this.setChildData(index, data)
+    }
+  }
+  init () {
+    $.each(this.relationType,(k, v) => {
+      window.btnSelectList[v].setSource = data => {
+        var name = v
+        this.set(name,data)
+      }
+      window.btnSelectList[v].btnSelectRelation = (btnName,key) => {
+        var index = this.getChildIndex(btnName) + 1
+        index > 0 && index < this.relationData.length && this.filter(index, key)
+      }
+    })
+  }
+
+  getChildIndex (childName) {
+    return this.relationType.indexOf(childName)
+  }
+
+  filter (index, key) {
+    this.setChildData(index, this.relationData[index][key])
+  }
+
+  setChildData (index, data) {
+    window.btnSelectList[this.relationType[index]].set(data)
+  }
 }

@@ -13,3 +13,17 @@ export default class Auth {
     moduleMap.resetByEmail = new ResetByEmail()
   }
 }
+
+// {
+//   1:{
+//     "1": "芜湖"
+//   },
+//   2:{
+//     "1": "芜湖"
+//   }
+// }
+
+// {
+//   "1": "武汉",
+//   "2": "安徽"
+// }

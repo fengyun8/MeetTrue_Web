@@ -162,4 +162,9 @@ class UsersController extends Controller
             ['password' => '密码修改成功']
         );
     }
+
+    public function getGalleryDetail($userId)
+    {
+        return view('gallery.detailGallery');
+    }
 }

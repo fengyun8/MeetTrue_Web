@@ -78,6 +78,9 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
 Route::get('/profile/{userId}', 'UsersController@show');
 Route::post('/profile', 'UsersController@edit');
 
+// 作品详情
+Route::get('/gallery/detail/{userId}','UsersController@getGalleryDetail');
+
 Route::group(['prefix' => 'users'], function () {
   Route::get('{slug}/profile', 'UsersController@getProfile');
   Route::post('{slug}/profile', 'UsersController@postProfile');

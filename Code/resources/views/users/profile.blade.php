@@ -41,6 +41,7 @@
     <div class="col form-contents u-size9of12">
       <span class="btn__select">
         <input type="text" value="123" placeholder="专业">
+        <input type="hidden" name="qwe">
         <button type="button"></button>
         <ul>
           <li>123</li>
@@ -75,22 +76,12 @@
     </div>
     <div class="col form-contents u-size9of12">
       <span class="btn__select">
-        <input type="text" value="123" placeholder="专业">
-        <button type="button"></button>
-        <ul>
-          <li>123</li>
-          <li>456</li>
-          <li>789</li>
-        </ul>
+        <input type="text" placeholder="省">
+        <input type="hidden" name="province">
       </span>
       <span class="btn__select">
-        <input type="text" value="123" placeholder="专业">
-        <button type="button"></button>
-        <ul>
-          <li>123</li>
-          <li>456</li>
-          <li>789</li>
-        </ul>
+        <input type="text" placeholder="市">
+        <input type="hidden" name="city">
       </span>
       <div class="form-hint"></div>
     </div>
