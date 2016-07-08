@@ -3,5 +3,5 @@
 @section('body-class', 'galleryDetail')
 @section('module','')
 @section('content')
-  
+  @include('gallery/detail')
 @endsection
