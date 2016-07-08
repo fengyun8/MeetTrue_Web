@@ -15,6 +15,7 @@
       </div>
     </div>
     @include('shared.footer')
+  <script src="//cdn.bootcss.com/vue/2.0.0-alpha.8/vue.min.js"></script>
   <script src="{{ asset('js/app.js')}}"></script>
 </body>
 </html>

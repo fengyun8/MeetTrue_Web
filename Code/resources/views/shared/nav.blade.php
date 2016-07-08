@@ -26,7 +26,7 @@
           </a>
           <a href='#' class="u-fontSizeSmaller link nav__headerImg nav__headerImg--auth nav__item" title="{{ Auth::user()->nickname}}" style="background-image: url('http://images.meet-true.com/default/201604/dwsxpwp7ucagzoej.jpg@150w_80Q')"></a>
         @else
-          <a href="#" class="nav__upload u-fontSizeSmaller link nav__item">
+          <a href="{{ url('/me/profile') }}" class="nav__upload u-fontSizeSmaller link nav__item">
             <i class="nav__authIcon"></i>
             <span class="u-textColorOrange">认证</span>
           </a>

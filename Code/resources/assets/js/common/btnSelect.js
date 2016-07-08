@@ -80,6 +80,18 @@ export class BtnSelectClass {
       var val = $(e.target).val()
       val !== this.preText && this.search(val)
     })
+    // 监听失去焦点动作，纠正输入
+    this.btn__select.find("input[type='text']").focusout(e => {
+      var nameEle = this.btn__select.find("input[type='hidden']")
+      var name = nameEle.val()
+      var value = $(e.target).val()
+      if(name == ""){
+        $(e.target).val('')
+        this.reBuildDom(this.data)
+        return false
+      }
+      $(e.target).val(this.data[name])
+    })
     this.setName()
   }
 
@@ -124,7 +136,8 @@ export class BtnSelectClass {
     var data = {}
     if(val != ""){
       $.each(this.data,(k, v) => {
-        (v.indexOf(val) > -1) && (data[k] = v)
+        (v.indexOf(val) > -1) && (data[k] = v);
+        (v == val) && (this.setValue(k,v));
       })
       this.reBuildDom(data)
     }else{
