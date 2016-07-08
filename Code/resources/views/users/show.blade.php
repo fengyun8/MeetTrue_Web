@@ -1,4 +1,5 @@
 @extends('app')
+@section('module','profile')
 @section('below-nav')
   @include('users.hero')
   <div class="u-maxWidth650 u-positionRelative u-marginTopNegative92 u-pv20 container">

@@ -40,13 +40,13 @@
     </div>
     <div class="col form-contents u-size9of12">
       <span class="btn__select">
-        <input type="text" value="123" placeholder="专业">
-        <input type="hidden" name="qwe">
+        <input type="text" placeholder="专业">
+        <input type="hidden" name="major">
         <button type="button"></button>
         <ul>
-          <li>123</li>
-          <li>456</li>
-          <li>789</li>
+          <li name="1">专业一</li>
+          <li name="2">专业二</li>
+          <li name="3">专业三</li>
         </ul>
       </span>
       <div class="form-hint"></div>
@@ -59,12 +59,13 @@
     </div>
     <div class="col form-contents u-size9of12">
       <span class="btn__select">
-        <input type="text" value="123" placeholder="专业">
+        <input type="text" placeholder="院校">
+        <input type="hidden" name="school">
         <button type="button"></button>
         <ul>
-          <li>123</li>
-          <li>456</li>
-          <li>789</li>
+          <li name="1">院校1</li>
+          <li name="2">院校2</li>
+          <li name="3">院校3</li>
         </ul>
       </span>
       <div class="form-hint"></div>

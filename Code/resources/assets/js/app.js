@@ -1,13 +1,15 @@
 import $ from 'jquery'
-import Common from './common/common'
-import Auth from './auth/auth'
+import CommonModule from './common/module'
+import AuthModule from './auth/module'
+import UserModule from './users/module'
 
 window.$ = $
 
 var moduleMap = {}
 
-new Common(moduleMap)
-new Auth(moduleMap)
+new CommonModule(moduleMap)
+new AuthModule(moduleMap)
+new UserModule(moduleMap)
 
 /**
  * 模块启动方法

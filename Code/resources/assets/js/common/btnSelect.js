@@ -1,19 +1,21 @@
 // 下拉选择按钮 btnSelect
-export default class btnSelect {
+export default class BtnSelect {
   constructor () {
     this.btnSelectClass = ".btn__select"
+    this.btnSelectList = {}
   }
   init () {
-    var btnSelectList = {}
+    var _this = this
     $(this.btnSelectClass).each(function(){
       var name = $(this).children('input[type="hidden"]').attr("name");
-      var btnSelect = new btnSelectClass($(this))
-      btnSelectList[name] = btnSelect
+      var btnSelect = new BtnSelectClass($(this))
+      _this.btnSelectList[name] = btnSelect
       btnSelect.init()
     })
-    window.btnSelectList = btnSelectList
-    var btnSelectRelations = new btnSelectRelation(["province","city"])
-    btnSelectRelations.init()
+  }
+
+  getList () {
+    return this.btnSelectList
   }
 }
 
@@ -35,6 +37,10 @@ export default class btnSelect {
       <input type="text" placeholder="专业">
       <input type="hidden" name="qwe">
     </span>
+ *
+ * 初始化：
+    var btnSelect = new btnSelectClass(jQueryDomObject,data)
+    btnSelect.init()
  * 
  * 导入数据
     window.btnSelectList.qwe.set({
@@ -47,7 +53,7 @@ export default class btnSelect {
     window.btnSelectList.qwe.get()
  *   
  */
-class btnSelectClass {
+export class BtnSelectClass {
   constructor (element, data = null){
     this.btn__select = element
     this.data = data
@@ -165,8 +171,8 @@ class btnSelectClass {
     })
  * 
  */
-class btnSelectRelation {
-  constructor (relationType) {
+export class BtnSelectRelation {
+  constructor (relationType, btnSelectList) {
     this.relationType = relationType
     this.relationData = []
     this.set = (childName, data) => {
@@ -174,14 +180,15 @@ class btnSelectRelation {
       this.relationData[index] = data
       index == 0 && this.setChildData(index, data)
     }
+    this.btnSelectList = btnSelectList
   }
   init () {
     $.each(this.relationType,(k, v) => {
-      window.btnSelectList[v].setSource = data => {
+      this.btnSelectList[v].setSource = data => {
         var name = v
         this.set(name,data)
       }
-      window.btnSelectList[v].btnSelectRelation = (btnName,key) => {
+      this.btnSelectList[v].btnSelectRelation = (btnName,key) => {
         var index = this.getChildIndex(btnName) + 1
         index > 0 && index < this.relationData.length && this.filter(index, key)
       }
@@ -197,6 +204,6 @@ class btnSelectRelation {
   }
 
   setChildData (index, data) {
-    window.btnSelectList[this.relationType[index]].set(data)
+    this.btnSelectList[this.relationType[index]].set(data)
   }
 }
