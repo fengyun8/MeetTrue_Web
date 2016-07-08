@@ -33,6 +33,8 @@ Route::group(['prefix' => 'file', 'namespace' => 'File'], function () {
     Route::post('upload-user-banner', 'FileController@uploadUserBanner');
 });
 
+
+
 //后台 admin
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function()
 {
@@ -75,15 +77,17 @@ Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function () {
     Route::get('bind-mail/{token}', 'AuthController@getBindMailByToken');
 });
 
-Route::get('/profile/{userId}', 'UsersController@show');
-Route::post('/profile', 'UsersController@edit');
-
 // 作品详情
 Route::get('/gallery/detail/{userId}','UsersController@getGalleryDetail');
 
-Route::group(['prefix' => 'users'], function () {
-  Route::get('{slug}/profile', 'UsersController@getProfile');
-  Route::post('{slug}/profile', 'UsersController@postProfile');
+// 用户公开页面
+Route::get('/@{slug}', 'UsersController@show');
+
+// 当前登录用户
+Route::group(['prefix' => 'me', 'namespace' => 'Me', 'middleware' => 'auth'], function () {
+  Route::get('profile', 'ProfileController@show');
+  Route::get('works', 'WorksController@index');
+  Route::get('settings', 'SettingsController@show');
 });
 
 // 用户修改密码：1. 验证当前密码 2.更新密码
