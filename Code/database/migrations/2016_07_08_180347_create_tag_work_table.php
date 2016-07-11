@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDataSchoolsTable extends Migration
+class CreateTagWorkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class CreateDataSchoolsTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_schools', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('code')->comment('学校码');
-            $table->string('name')->comment('学校名');
+        Schema::create('tag_work', function (Blueprint $table) {
+            $table->Biginteger('work_id')->comment('作品集ID');
+            $table->Biginteger('tag_id')->comment('标签ID');
         });
     }
 
@@ -26,6 +25,6 @@ class CreateDataSchoolsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('data_schools');
+        Schema::drop('tag_work');
     }
 }

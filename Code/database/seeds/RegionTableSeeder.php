@@ -1,21 +1,20 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class DataRegionTableSeeder extends Seeder
+class RegionTableSeeder extends Seeder
 {
     private $table;
 
-    /**
+   /**
      * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->table = DB::table('data_regions');
-        $this->command->info('清空地址字典表data_regions中的数据');
+        $this->table = DB::table('regions');
+        $this->command->info('清空地址字典表regions中的数据');
         $this->table->truncate();
 
         // 省份和对应的城市列表
@@ -439,20 +438,20 @@ class DataRegionTableSeeder extends Seeder
             self::addStateAndCityRecursive($state_name, $city_list);
         }
 
-        $this->command->info('地址字典表data_regions字典数据成功生成');
+        $this->command->info('地址字典表regions字典数据成功生成');
     }
 
     public static function addStateAndCityRecursive($state_name, $city_list)
     {
         // 先添加省份
-        $parent_id = DB::table('data_regions')->insertGetId([
+        $parent_id = DB::table('regions')->insertGetId([
             'name' => $state_name,
             'parent_id' => 0,
         ]);
 
         // 循环插入城市
         foreach ($city_list as $dummy => $city_name) {
-            DB::table('data_regions')->insert([
+            DB::table('regions')->insert([
                 'name' => $city_name,
                 'parent_id' => $parent_id,
             ]);

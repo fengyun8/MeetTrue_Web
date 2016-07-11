@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDataRegionsTable extends Migration
+class CreateRegionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateDataRegionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_regions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name')->comment('区域名');
-            $table->bigInteger('parent_id')->comment('父区域ID');
+        Schema::create('regions', function (Blueprint $table) {
+            $table->BigIncrements('id');
+            $table->string('name')->comment('地名');
+            $table->Integer('parent_id')->comment('父亲ID');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateDataRegionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('data_regions');
+        Schema::drop('regions');
     }
 }

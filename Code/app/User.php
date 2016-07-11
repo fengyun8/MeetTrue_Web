@@ -38,15 +38,64 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token','token'];
 
+    /**
+     * 获取用户所在省份
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function province()
+    {
+        return $this->belongsTo('App\Region','province_id', 'id');
+    }
 
-    /************************************ Arrtribute 部分 *************************************/
-    public function getANameAttribute()
+    /**
+     * 获取用户所在城市
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function city()
+    {
+        return $this->belongsTo('App\Region','city_id', 'id');
+    }
+
+    /**
+     * 获取用户的专业
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function major()
+    {
+        return $this->belongsTo('App\Major', 'major_id', 'id');
+    }
+
+    /**
+     * 获取用户所属的学校
+     * 
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function school()
+    {
+        return $this->belongsTo('App\School', 'school_id', 'id');
+    }
+
+    /**
+     * 获取用户的所有作品集
+     * 
+     * @return [type] [description]
+     */
+    public function works()
+    {
+        return $this->hasMany('App\Work', 'user_id', 'id');
+    }
+
+
+    public function getRealnameAttribute()
     {
         // 合并名字
         return $this->last_name . $this->first_name;
     }
 
-    public function getAAvatarAttribute()
+    public function getAvatarAttribute()
     {
         $default_avatar = asset('images/avatar.jpg');
 
@@ -55,7 +104,7 @@ class User extends Model implements AuthenticatableContract,
         return $src;
     }
 
-    public function getABannerAttribute()
+    public function getBannerAttribute()
     {
         $default_avatar = asset('images/hero-cover.jpg');
 
@@ -64,35 +113,6 @@ class User extends Model implements AuthenticatableContract,
         return $src;
     }
 
-    public function getANicknameAttribute()
-    {
-        return $this->nickname;
-    }
-
-    public function getAMajorAttribute()
-    {
-        return DataDict::getValue(DataDictEnum::MAJOR, $this->major_id);
-    }
-
-    public function getASchoolAttribute()
-    {
-        return DataSchool::getNameByCode($this->school_id);
-    }
-
-    public function getAProvinceAttribute()
-    {
-        return $this->province_id;
-    }
-
-    public function getACityAttribute()
-    {
-        return $this->city_id;
-    }
-
-    public function getAGenderAttribute()
-    {
-        return DataDict::getValue(DataDictEnum::GENDER, $this->gender);
-    }
 
     /**
      * 获取手机
@@ -159,4 +179,5 @@ class User extends Model implements AuthenticatableContract,
     {
         return \App\User::whereId($userId)->update($params);
     }
+
 }

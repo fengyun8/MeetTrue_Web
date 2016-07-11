@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DataSchoolTableSeeder extends Seeder
+class SchoolTableSeeder extends Seeder
 {
     private $table;
 
@@ -14,9 +14,10 @@ class DataSchoolTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->table = DB::table('data_schools');
-        $this->command->info('清空data_school中的数据');
+        $this->table = DB::table('schools');
+        $this->command->info('清空schools中的数据');
         $this->table->truncate();
+        DB::statement("alter table mt_schools AUTO_INCREMENT=34");
 
   $this->simpleInsert([
             '阿坝师范高等专科学校',
@@ -1997,15 +1998,13 @@ class DataSchoolTableSeeder extends Seeder
             '遵义医学院医学与科技学院',
         ]);
 
-        $this->command->info('data_school字典数据成功生成');
+        $this->command->info('schools字典数据成功生成');
     }
 
     private function simpleInsert(array $data)
     {
-        static $code = 34;
         foreach ($data as $name) {
             $this->table->insert([
-                'code' => $code++,
                 'name' => $name
             ]);
         }

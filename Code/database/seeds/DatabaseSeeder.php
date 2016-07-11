@@ -14,8 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(DataDictTableSeeder::class);
-        $this->call(DataSchoolTableSeeder::class);
-        $this->call(DataRegionTableSeeder::class);
+        $this->call(RegionTableSeeder::class);
+        $this->call(MajorTableSeeder::class);
+        $this->call(SchoolTableSeeder::class);
+        $this->call(CopyrightTableSeeder::class);
     }
 }
